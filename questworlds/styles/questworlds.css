@@ -154,6 +154,42 @@
   color: var(--qw-color-muted);
 }
 
+/* ---- Resolution Points ----------------------------------- */
+.questworlds .rp-tracker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.questworlds .rp-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.questworlds .rp-controls button {
+  border: 1px solid var(--qw-color-border);
+  background: transparent;
+  color: var(--qw-color-primary);
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.questworlds .rp-value {
+  min-width: 28px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.questworlds .rp-max {
+  font-size: 0.85em;
+  color: var(--qw-color-muted);
+}
+
 /* ---- Penalty / Bonus summary ------------------------------- */
 .questworlds .penalty-bonus {
   display: flex;
@@ -236,6 +272,12 @@
 .questworlds-contest-result .contest-outcome {
   font-weight: bold;
   color: var(--qw-color-primary);
+}
+
+.questworlds-contest-result .contest-autosuccess {
+  margin-top: 6px;
+  font-size: 0.85em;
+  color: var(--qw-color-muted);
 }
 
 .questworlds-contest-roll .contest-augment {

@@ -53,6 +53,9 @@
     "Advances": "Advances",
     "PenaltyTotal": "Penalty Total",
     "BonusTotal": "Bonus Total",
+    "ResolutionPoints": "Resolution Points",
+    "IncreaseResolution": "Increase",
+    "DecreaseResolution": "Decrease",
 
     "Consequences": "Consequences",
     "Benefits":     "Benefits",
@@ -136,6 +139,7 @@
       "Tie":              "Tie",
       "SpentStoryPoint":  "Spent a Story Point",
       "AutoSuccess": "Automatic success (no roll needed)",
+      "AutoSuccessNote": "This contest was resolved automatically due to auto-success.",
       "Narration": {
         "CompleteVictory": "The hero dominates the challenge!",
         "MarginalVictory": "The hero scrapes through with a win.",

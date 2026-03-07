@@ -43,4 +43,9 @@
       <em>{{localize "QUESTWORLDS.ContestResult.SpentStoryPoint"}} ({{remainingStoryPoints}} {{localize "QUESTWORLDS.StoryPoints"}})</em>
     </div>
   {{/if}}
+  {{#if autoSuccess}}
+    <div class="contest-autosuccess">
+      <em>{{localize "QUESTWORLDS.ContestResult.AutoSuccessNote"}}</em>
+    </div>
+  {{/if}}
 </div>

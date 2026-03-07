@@ -123,7 +123,7 @@
 *Goal: Multi-round conflict resolution for dramatic scenes.*
 
 **Scored Sequence**
-- [ ] Sequence tracker UI (sidebar panel or chat thread)
+- [x] Sequence tracker UI (sheet RP tracker)
 - [ ] Resolution Point (RP) pools: hero starts at 0, climbs to 5 to win
 - [ ] Per-exchange roll using contest engine
 - [ ] RP award by outcome: Complete Victory +2 / Marginal Victory +1 / Tie 0 / Marginal Defeat −1 / Complete Defeat −2
@@ -149,7 +149,7 @@
 
 - [ ] Full NPC sheet layout with named abilities for group contests
 - [x] Resistance Ladder quick-reference panel (clickable to set resistance in roll dialog)
-- [ ] GM roll: click NPC ability/resistance → fires contest as opposition
+- [x] GM roll: click NPC ability/resistance → fires contest as opposition
 - [ ] Compendium: default resistance values for common obstacle types
 - [ ] Scene tracker: active consequences on all tokens visible to GM
 

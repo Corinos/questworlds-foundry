@@ -64,15 +64,24 @@ function determineOutcome(heroLevel, oppLevel) {
   return "CompleteDefeat";
 }
 
-export async function openContestDialog(actor, abilityItem) {
+export async function openContestDialog(
+  actor,
+  abilityItem,
+  {
+    defaultResistance = undefined,
+    defaultOppositionMasteries = undefined,
+  } = {},
+) {
   const abilityName = abilityItem.name;
   const baseRaw = actor.getEffectiveRating?.(abilityItem) ?? abilityItem.system.rating;
   const baseTarget = targetNumber(baseRaw);
 
   // Pre-fill resistance if a single token is selected and has a resistanceRating
   const controlledToken = canvas.tokens.controlled?.[0];
-  const defaultResistance =
+  const fallbackResistance =
     controlledToken?.actor?.system?.resistanceRating ?? 14;
+  const defaultResistanceValue =
+    typeof defaultResistance === "number" ? defaultResistance : fallbackResistance;
 
   // Track active penalties/benefits (from consequences/benefits)
   const penaltyTotal = actor.system.penaltyTotal ?? 0;
@@ -119,11 +128,13 @@ export async function openContestDialog(actor, abilityItem) {
         </div>
         <div class="form-group">
           <label for="resistance">${game.i18n.localize("QUESTWORLDS.ContestDialog.Resistance")}</label>
-          <input type="number" id="resistance" name="resistance" value="${defaultResistance}" min="1" max="20" />
+          <input type="number" id="resistance" name="resistance" value="${defaultResistanceValue}" min="1" max="20" />
         </div>
         <div class="form-group">
           <label for="oppositionMastery">${game.i18n.localize("QUESTWORLDS.ContestDialog.OppositionMasteries")}</label>
-          <input type="number" id="oppositionMastery" name="oppositionMastery" value="0" min="0" max="5" />
+          <input type="number" id="oppositionMastery" name="oppositionMastery" value="${
+            typeof defaultOppositionMasteries === "number" ? defaultOppositionMasteries : 0
+          }" min="0" max="5" />
         </div>
         <div class="form-group">
           <label for="augmentAbility">${game.i18n.localize("QUESTWORLDS.ContestDialog.Augment")}</label>

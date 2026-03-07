@@ -71,6 +71,10 @@ export class QWCharacterSheet extends ActorSheet {
     html.find(".xp-increment").click(this._onXpIncrement.bind(this));
     html.find(".xp-decrement").click(this._onXpDecrement.bind(this));
 
+    // Resolution Points (for sequences)
+    html.find(".rp-increment").click(this._onRpIncrement.bind(this));
+    html.find(".rp-decrement").click(this._onRpDecrement.bind(this));
+
     // Roll placeholder
     html.find(".ability-roll").click(this._onAbilityRoll.bind(this));
 
@@ -155,6 +159,15 @@ export class QWCharacterSheet extends ActorSheet {
   async _onXpDecrement() {
     const newValue = Math.max(0, this.actor.system.experience.value - 1);
     await this.actor.update({ "system.experience.value": newValue });
+  }
+
+  async _onRpIncrement() {
+    await this.actor.update({ "system.resolutionPoints.value": this.actor.system.resolutionPoints.value + 1 });
+  }
+
+  async _onRpDecrement() {
+    const newValue = Math.max(0, this.actor.system.resolutionPoints.value - 1);
+    await this.actor.update({ "system.resolutionPoints.value": newValue });
   }
 
   async _onItemCreate(event) {
