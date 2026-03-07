@@ -252,6 +252,25 @@
   color: var(--qw-color-primary);
 }
 
+.questworlds-sequence-end {
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid var(--qw-color-border);
+  border-radius: var(--qw-border-radius);
+  font-weight: bold;
+  color: var(--qw-color-text);
+}
+
+.questworlds-sequence-end--success {
+  background: rgba(223, 240, 220, 0.9);
+  border-color: rgba(84, 139, 74, 0.8);
+}
+
+.questworlds-sequence-end--failure {
+  background: rgba(240, 223, 223, 0.9);
+  border-color: rgba(153, 55, 55, 0.8);
+}
+
 .questworlds-contest-result .contest-summary {
   display: flex;
   gap: 16px;

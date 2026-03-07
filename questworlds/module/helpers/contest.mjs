@@ -209,6 +209,8 @@ export async function openContestDialog(
   });
 }
 
+const EXPIRES_NEXT_CONTEST = "nextContest";
+
 export async function runContest({ actor, abilityItem, resistance, oppositionMasteries, situationalModifier, spendStoryPoint, applyModifiers, augmentAbilityId }) {
   const heroRaw = actor.getEffectiveRating?.(abilityItem) ?? abilityItem.system.rating;
   const heroBase = targetNumber(heroRaw);
@@ -353,4 +355,15 @@ export async function runContest({ actor, abilityItem, resistance, oppositionMas
     speaker: ChatMessage.getSpeaker({ actor }),
     content: rollContent + resultContent,
   });
+
+  // Expire any temporary effects that were meant for a single contest.
+  const expired = actor.items
+    .filter((i) =>
+      (i.type === "benefit" || i.type === "consequence") &&
+      i.system.expiresOn === EXPIRES_NEXT_CONTEST,
+    )
+    .map((i) => i.id);
+  if (expired.length) {
+    await actor.deleteEmbeddedDocuments("Item", expired);
+  }
 }

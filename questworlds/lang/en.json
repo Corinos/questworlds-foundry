@@ -151,6 +151,32 @@
       "ApplyRp": "Apply Resolution Points"
     },
 
+    "Sequence": {
+      "Success": "The sequence is complete! You achieved your goal.",
+      "Failure": "The sequence ends in failure and the situation slips away.",
+      "StrongSuccess": "You claim a resounding victory. This feels like a strong outcome.",
+      "WeakSuccess": "You barely get there, but you succeed.",
+      "WeakFailure": "You falter and fail, but it isn’t total collapse.",
+      "StrongFailure": "You crash hard; the setback is significant."
+    },
+
+    "SequenceEffect": {
+      "Source": "Sequence outcome",
+      "Applied": "Applied",
+      "Name": {
+        "StrongSuccess": "Momentum (Strong Success)",
+        "WeakSuccess": "Momentum (Success)",
+        "WeakFailure": "Injury (Failure)",
+        "StrongFailure": "Serious Injury (Defeat)"
+      },
+      "Description": {
+        "StrongSuccess": "You gain a strong bonus for upcoming actions.",
+        "WeakSuccess": "You gain a small bonus for upcoming actions.",
+        "WeakFailure": "You suffer a light consequence from the setback.",
+        "StrongFailure": "You suffer a serious consequence from the setback."
+      }
+    },
+
     "ItemType": {
       "ability":     "Ability",
       "flaw":        "Flaw",

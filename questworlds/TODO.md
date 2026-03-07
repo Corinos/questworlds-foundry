@@ -127,8 +127,8 @@
 - [x] Resolution Point (RP) pools: hero starts at 0, climbs to 5 to win (tracked on sheet)
 - [x] Per-exchange roll using contest engine (contest dialog + chat output)
 - [x] RP award by outcome: Complete Victory +2 / Marginal Victory +1 / Tie 0 / Marginal Defeat −1 / Complete Defeat −2 (apply via chat button)
-- [ ] Sequence end detection: RP ≥ 5 or RP ≤ −5
-- [ ] Final consequence determined by sequence outcome degree
+- [x] Sequence end detection: RP reaches 0 (failure) or max (success)
+- [x] Final consequence determined by sequence outcome degree
 
 **Group Simple Contest**
 - [ ] Each PC rolls vs shared resistance

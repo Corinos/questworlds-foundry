@@ -162,12 +162,16 @@ export class QWCharacterSheet extends ActorSheet {
   }
 
   async _onRpIncrement() {
-    await this.actor.update({ "system.resolutionPoints.value": this.actor.system.resolutionPoints.value + 1 });
+    const current = this.actor.system.resolutionPoints.value ?? 0;
+    const max = this.actor.system.resolutionPoints.max ?? 0;
+    const next = Math.min(max, current + 1);
+    await this.actor.update({ "system.resolutionPoints.value": next });
   }
 
   async _onRpDecrement() {
-    const newValue = Math.max(0, this.actor.system.resolutionPoints.value - 1);
-    await this.actor.update({ "system.resolutionPoints.value": newValue });
+    const current = this.actor.system.resolutionPoints.value ?? 0;
+    const next = Math.max(0, current - 1);
+    await this.actor.update({ "system.resolutionPoints.value": next });
   }
 
   async _onItemCreate(event) {
