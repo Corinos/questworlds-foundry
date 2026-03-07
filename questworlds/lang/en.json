@@ -147,7 +147,8 @@
         "MarginalDefeat": "The hero is pushed back this time.",
         "CompleteDefeat": "The challenge overwhelms the hero."
       },
-      "RerollStoryPoint": "Spend 1 Story Point to reroll"
+      "RerollStoryPoint": "Spend 1 Story Point to reroll",
+      "ApplyRp": "Apply Resolution Points"
     },
 
     "ItemType": {

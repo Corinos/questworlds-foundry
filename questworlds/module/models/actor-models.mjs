@@ -16,10 +16,18 @@
 
 const { fields } = foundry.data;
 
+// Compatibility shim for Foundry v13 (TypeDataModel renamed/relocated in some builds)
+const TypeDataModel =
+  foundry.abstract?.TypeDataModel ??
+  foundry.data?.TypeDataModel ??
+  foundry.data?.DataModel ??
+  foundry.abstract?.DataModel ??
+  class {};
+
 /* ------------------------------------------------------------------ */
 /*  Shared base for both actor types                                    */
 /* ------------------------------------------------------------------ */
-class QWBaseActorData extends foundry.abstract.TypeDataModel {
+class QWBaseActorData extends TypeDataModel {
   static defineSchema() {
     return {
       description: new fields.HTMLField({ required: false, blank: true, initial: "" }),

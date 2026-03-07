@@ -2,7 +2,7 @@
 
 > Last updated: 2026-03-07
 > System version: 0.1.0
-> Foundry target: v12 | Data model: TypeDataModel (modern)
+> Foundry target: v13 | Data model: TypeDataModel (modern)
 
 ---
 
@@ -124,9 +124,9 @@
 
 **Scored Sequence**
 - [x] Sequence tracker UI (sheet RP tracker)
-- [ ] Resolution Point (RP) pools: hero starts at 0, climbs to 5 to win
-- [ ] Per-exchange roll using contest engine
-- [ ] RP award by outcome: Complete Victory +2 / Marginal Victory +1 / Tie 0 / Marginal Defeat −1 / Complete Defeat −2
+- [x] Resolution Point (RP) pools: hero starts at 0, climbs to 5 to win (tracked on sheet)
+- [x] Per-exchange roll using contest engine (contest dialog + chat output)
+- [x] RP award by outcome: Complete Victory +2 / Marginal Victory +1 / Tie 0 / Marginal Defeat −1 / Complete Defeat −2 (apply via chat button)
 - [ ] Sequence end detection: RP ≥ 5 or RP ≤ −5
 - [ ] Final consequence determined by sequence outcome degree
 

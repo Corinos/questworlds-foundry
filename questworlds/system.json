@@ -13,8 +13,8 @@
   "license": "LICENSE.txt",
   "readme": "README.md",
   "compatibility": {
-    "minimum": "12",
-    "verified": "12"
+    "minimum": "13",
+    "verified": "13"
   },
   "esmodules": ["module/questworlds.mjs"],
   "styles": ["styles/questworlds.css"],

@@ -48,4 +48,15 @@
       <em>{{localize "QUESTWORLDS.ContestResult.AutoSuccessNote"}}</em>
     </div>
   {{/if}}
+  {{#if canApplyRp}}
+    <div class="contest-actions">
+      <a
+        class="button questworlds-apply-rp"
+        data-actor-id="{{actorId}}"
+        data-rp-delta="{{rpDelta}}"
+      >
+        {{localize "QUESTWORLDS.ContestResult.ApplyRp"}} ({{rpDelta}})
+      </a>
+    </div>
+  {{/if}}
 </div>

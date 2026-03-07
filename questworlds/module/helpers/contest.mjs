@@ -319,6 +319,23 @@ export async function runContest({ actor, abilityItem, resistance, oppositionMas
     canReroll:
       actor.system.storyPoints.value > 0 && outcomeKey !== "CompleteVictory",
     autoSuccess,
+    rpDelta: {
+      CompleteVictory: 2,
+      MarginalVictory: 1,
+      Tie: 0,
+      MarginalDefeat: -1,
+      CompleteDefeat: -2,
+    }[outcomeKey],
+    canApplyRp:
+      (game.user.isGM || actor.isOwner) &&
+      typeof actor.system.resolutionPoints?.value === "number" &&
+      ({
+        CompleteVictory: 2,
+        MarginalVictory: 1,
+        Tie: 0,
+        MarginalDefeat: -1,
+        CompleteDefeat: -2,
+      }[outcomeKey] || 0) !== 0,
   };
 
   const rollContent = await renderTemplate(

@@ -17,6 +17,13 @@ import { openContestDialog, runContest } from "./helpers/contest.mjs";
 /*  Hooks: init                                                          */
 /* ------------------------------------------------------------------ */
 Hooks.once("init", function () {
+  const major = Number(game.version?.split?.[0] ?? 0);
+  if (major && major !== 13) {
+    ui.notifications.warn(
+      `QuestWorlds is designed for Foundry V13; running on V${game.version}. Some features may not work as expected.`,
+    );
+  }
+
   console.log("QuestWorlds | Initialising QuestWorlds system");
 
   // Expose system namespace on the global game object for convenience
@@ -98,6 +105,26 @@ Hooks.once("ready", function () {
         oppositionMasteries,
         spendStoryPoint: true,
       });
+    });
+
+    // Allow applying RP from the contest result card
+    html.on("click", ".questworlds-apply-rp", async (event) => {
+      event.preventDefault();
+      const button = $(event.currentTarget);
+      const actorId = button.data("actor-id");
+      const rpDelta = Number(button.data("rp-delta")) || 0;
+
+      const actor = game.actors.get(actorId);
+      if (!actor) return;
+
+      const current = actor.system.resolutionPoints?.value ?? 0;
+      const max = actor.system.resolutionPoints?.max ?? 0;
+      const next = Math.min(max, Math.max(0, current + rpDelta));
+      await actor.update({ "system.resolutionPoints.value": next });
+
+      ui.notifications.info(
+        `${actor.name} ${rpDelta >= 0 ? "gains" : "loses"} ${Math.abs(rpDelta)} RP (now ${next}/${max})`,
+      );
     });
   });
 });

@@ -14,6 +14,14 @@
 
 const { fields } = foundry.data;
 
+// Compatibility shim for Foundry v13 (TypeDataModel renamed/relocated in some builds)
+const TypeDataModel =
+  foundry.abstract?.TypeDataModel ??
+  foundry.data?.TypeDataModel ??
+  foundry.data?.DataModel ??
+  foundry.abstract?.DataModel ??
+  class {};
+
 /* ------------------------------------------------------------------ */
 /*  Shared rating field schema (reused across types)                   */
 /* ------------------------------------------------------------------ */
@@ -32,7 +40,7 @@ function ratingSchema() {
 /* ------------------------------------------------------------------ */
 /*  Ability                                                             */
 /* ------------------------------------------------------------------ */
-export class QWAbilityData extends foundry.abstract.TypeDataModel {
+export class QWAbilityData extends TypeDataModel {
   static defineSchema() {
     return {
       ...ratingSchema(),
@@ -77,7 +85,7 @@ export class QWAbilityData extends foundry.abstract.TypeDataModel {
 /* ------------------------------------------------------------------ */
 /*  Flaw                                                                */
 /* ------------------------------------------------------------------ */
-export class QWFlawData extends foundry.abstract.TypeDataModel {
+export class QWFlawData extends TypeDataModel {
   static defineSchema() {
     return {
       ...ratingSchema(),
@@ -89,7 +97,7 @@ export class QWFlawData extends foundry.abstract.TypeDataModel {
 /* ------------------------------------------------------------------ */
 /*  Benefit  (temporary positive modifier)                             */
 /* ------------------------------------------------------------------ */
-export class QWBenefitData extends foundry.abstract.TypeDataModel {
+export class QWBenefitData extends TypeDataModel {
   static defineSchema() {
     return {
       // Bonus modifier applied to rolls (+3, +6, +9)
@@ -117,7 +125,7 @@ export class QWBenefitData extends foundry.abstract.TypeDataModel {
 /* ------------------------------------------------------------------ */
 /*  Consequence  (temporary negative modifier)                         */
 /* ------------------------------------------------------------------ */
-export class QWConsequenceData extends foundry.abstract.TypeDataModel {
+export class QWConsequenceData extends TypeDataModel {
   static defineSchema() {
     return {
       /**
