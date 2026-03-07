@@ -1,0 +1,37 @@
+<div class="questworlds-contest-roll">
+  <h3>{{localize "QUESTWORLDS.ContestRoll.Title"}} — {{abilityName}}</h3>
+  <div class="contest-summary">
+    <div class="contest-side">
+      <h4>{{localize "QUESTWORLDS.ContestRoll.Hero"}}</h4>
+      <div><strong>{{heroRoll}}</strong> / {{heroTarget}} ({{heroLevelLabel}})</div>
+      <div class="contest-masteries">{{localize "QUESTWORLDS.Mastery"}} {{heroMasteries}}</div>
+    </div>
+    <div class="contest-side">
+      <h4>{{localize "QUESTWORLDS.ContestRoll.Opposition"}}</h4>
+      <div><strong>{{oppRoll}}</strong> / {{oppTarget}} ({{oppLevelLabel}})</div>
+      <div class="contest-masteries">{{localize "QUESTWORLDS.Mastery"}} {{oppositionMasteries}}</div>
+    </div>
+  </div>
+  {{#if augment}}
+    <div class="contest-augment">
+      <h4>{{localize "QUESTWORLDS.ContestRoll.Augment"}}</h4>
+      <div>
+        <strong>{{augment.roll}}</strong> / {{augment.target}} ({{augmentLevelLabel}})
+        — {{augment.abilityName}} ({{localize "QUESTWORLDS.ContestRoll.Bonus"}}: {{augment.bonus}})
+      </div>
+    </div>
+  {{/if}}
+  {{#if applyModifiers}}
+    <div class="contest-modifiers">
+      <strong>{{localize "QUESTWORLDS.ContestRoll.Modifiers"}}:</strong>
+      <span>{{modifierTotal}}</span>
+      <span class="help-text">(Penalty: {{penaltyTotal}}, Bonus: {{bonusTotal}})</span>
+    </div>
+  {{/if}}
+  {{#if situationalModifier}}
+    <div class="contest-modifiers">
+      <strong>{{localize "QUESTWORLDS.ContestRoll.Situational"}}:</strong>
+      <span>{{situationalModifier}}</span>
+    </div>
+  {{/if}}
+</div>

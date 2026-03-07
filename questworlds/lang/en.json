@@ -1,0 +1,156 @@
+{
+  "QUESTWORLDS": {
+
+    "SheetCharacter": "QuestWorlds Character Sheet",
+    "SheetNpc":       "QuestWorlds NPC Sheet",
+    "SheetAbility":   "QuestWorlds Ability Sheet",
+
+    "TabAbilities": "Abilities",
+    "TabFlaws":     "Flaws",
+    "TabEffects":   "Effects",
+    "TabNotes":     "Notes",
+
+    "Abilities":  "Abilities",
+    "Flaws":      "Flaws",
+    "Keywords":   "Keywords",
+    "Breakouts":  "Breakouts",
+    "Standalone": "Standalone",
+
+    "NoAbilities": "No abilities. Click + to add one.",
+    "NoFlaws":     "No flaws recorded.",
+    "EmptyKeywords": "No keywords yet. Create one to start building your character.",
+    "EmptyStandalones": "No standalone abilities yet. Add one to get started.",
+    "EmptyConsequences": "No consequences. You’re clean and healthy.",
+    "EmptyBenefits": "No benefits active.",
+    "EmptyBreakouts": "No breakouts yet — add one to this keyword.",
+
+    "AddAbility":  "Add Ability",
+    "AddKeyword":  "Add Keyword",
+    "AddBreakout": "Add Breakout",
+
+    "NewItem": "New {type}",
+
+    "Rating":       "Rating",
+    "AbilityType":  "Ability Type",
+    "BreakoutBonus":"Breakout Bonus",
+    "Description":  "Description",
+    "Severity":     "Severity",
+    "Source":       "Source",
+    "Recovering":   "Recovering",
+    "Bonus":        "Bonus Amount",
+    "ExpiresOn":    "Expires When",
+
+    "Occupation": "Occupation",
+    "Community":  "Community",
+    "Homeland":   "Homeland",
+
+    "StoryPoints":       "Story Points",
+    "StoryPointSpend":   "Spend a Story Point",
+
+    "Experience": "Experience",
+    "DecreaseExperience": "Decrease",
+    "IncreaseExperience": "Increase",
+    "Advances": "Advances",
+    "PenaltyTotal": "Penalty Total",
+    "BonusTotal": "Bonus Total",
+
+    "Consequences": "Consequences",
+    "Benefits":     "Benefits",
+
+    "Consequence": {
+      "Hurt":    "Hurt",
+      "Injured": "Injured",
+      "Dying":   "Dying",
+      "Dead":    "Dead"
+    },
+
+    "ResistanceLadder": {
+      "Automatic":     "Automatic (no roll)",
+      "VeryEasy":      "Very Easy — 6",
+      "Easy":          "Easy — 9",
+      "Moderate":      "Moderate — 14",
+      "Hard":          "Hard — 18",
+      "VeryHard":      "Very Hard — 1M",
+      "Formidable":    "Formidable — 5M",
+      "Stiff":         "Stiff — 10M",
+      "VeryStiff":     "Very Stiff — 15M",
+      "Overwhelming":  "Overwhelming — 1M2"
+    },
+
+    "ResistanceRating": "Resistance Rating",
+    "NpcType":          "NPC Type",
+
+    "ContestResult": {
+      "Title": "Contest Result",
+      "Outcome": "Outcome",
+      "CompleteVictory":  "Complete Victory",
+      "MarginalVictory":  "Marginal Victory",
+      "MarginalDefeat":   "Marginal Defeat",
+      "CompleteDefeat":   "Complete Defeat",
+      "Tie":              "Tie",
+      "SpentStoryPoint":  "Spent a Story Point"
+    },
+
+    "Roll": {
+      "RollingFor":   "Rolling for",
+      "vs":           "vs.",
+      "Resistance":   "Resistance",
+      "HeroDie":      "Hero Roll",
+      "OppositionDie":"Opposition Roll",
+      "Mastery":      "Mastery",
+      "Bump":         "Bump!"
+    },
+    "RollAbility": "Roll ability",
+    "RollNotImplemented": "Roll is not implemented yet (placeholder).",
+
+    "ContestDialog": {
+      "Title": "Contest",
+      "Attacker": "Attacker",
+      "Resistance": "Resistance TN",
+      "OppositionMasteries": "Opposition Masteries",
+      "Augment": "Augment Ability",
+      "None": "None",
+      "ApplyModifiers": "Apply consequences & benefits",
+      "SituationalModifier": "Situational Modifier",
+      "SituationalModifierHelp": "Use for temporary bonuses/penalties (e.g. cover, terrain, morale)",
+      "Roll": "Roll"
+    },
+
+
+    "ContestRoll": {
+      "Title": "Contest Roll",
+      "Hero": "Hero",
+      "Opposition": "Opposition",
+      "Augment": "Augment",
+      "Bonus": "Bonus",
+      "Modifiers": "Modifiers",
+      "Situational": "Situational"
+    },
+    "ContestResult": {
+      "Title": "Contest Result",
+      "Outcome": "Outcome",
+      "CompleteVictory":  "Complete Victory",
+      "MarginalVictory":  "Marginal Victory",
+      "MarginalDefeat":   "Marginal Defeat",
+      "CompleteDefeat":   "Complete Defeat",
+      "Tie":              "Tie",
+      "SpentStoryPoint":  "Spent a Story Point",
+      "AutoSuccess": "Automatic success (no roll needed)",
+      "Narration": {
+        "CompleteVictory": "The hero dominates the challenge!",
+        "MarginalVictory": "The hero scrapes through with a win.",
+        "Tie": "Both sides stand their ground.",
+        "MarginalDefeat": "The hero is pushed back this time.",
+        "CompleteDefeat": "The challenge overwhelms the hero."
+      },
+      "RerollStoryPoint": "Spend 1 Story Point to reroll"
+    },
+
+    "ItemType": {
+      "ability":     "Ability",
+      "flaw":        "Flaw",
+      "benefit":     "Benefit",
+      "consequence": "Consequence"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{{!-- QuestWorlds Ability / Item Sheet --}}
+<form class="questworlds item sheet" autocomplete="off">
+  <header class="sheet-header item-header">
+    <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="header-fields">
+      <h1><input name="name" type="text" value="{{item.name}}" /></h1>
+      <div class="item-type-badge">{{localize (qwConcat "QUESTWORLDS.ItemType." item.type)}}</div>
+    </div>
+  </header>
+
+  <section class="sheet-body">
+
+    {{!-- Ability / Flaw: rating and type --}}
+    {{#if (qwEq item.type "ability")}}
+      <div class="form-group rating-group">
+        <label>{{localize "QUESTWORLDS.Rating"}}</label>
+        <input type="number" name="system.rating" value="{{system.rating}}" min="1" />
+        <span class="rating-display">{{qwRating system.rating}}</span>
+      </div>
+      <div class="form-group">
+        <label>{{localize "QUESTWORLDS.AbilityType"}}</label>
+        <select name="system.abilityType">
+          <option value="standalone" {{#if (qwEq system.abilityType "standalone")}}selected{{/if}}>Standalone</option>
+          <option value="keyword"    {{#if (qwEq system.abilityType "keyword")}}selected{{/if}}>Keyword</option>
+          <option value="breakout"   {{#if (qwEq system.abilityType "breakout")}}selected{{/if}}>Breakout</option>
+        </select>
+      </div>
+      {{#if (qwEq system.abilityType "breakout")}}
+        <div class="form-group">
+          <label>{{localize "QUESTWORLDS.BreakoutBonus"}}</label>
+          <input type="number" name="system.breakoutBonus" value="{{system.breakoutBonus}}" />
+        </div>
+      {{/if}}
+    {{/if}}
+
+    {{#if (qwEq item.type "flaw")}}
+      <div class="form-group rating-group">
+        <label>{{localize "QUESTWORLDS.Rating"}}</label>
+        <input type="number" name="system.rating" value="{{system.rating}}" min="1" />
+        <span class="rating-display flaw-rating">{{qwRating system.rating}}</span>
+      </div>
+    {{/if}}
+
+    {{!-- Consequence --}}
+    {{#if (qwEq item.type "consequence")}}
+      <div class="form-group">
+        <label>{{localize "QUESTWORLDS.Severity"}}</label>
+        <select name="system.severity">
+          <option value="1" {{#if (qwEq system.severity 1)}}selected{{/if}}>1 — Hurt (–3)</option>
+          <option value="2" {{#if (qwEq system.severity 2)}}selected{{/if}}>2 — Injured (–6)</option>
+          <option value="3" {{#if (qwEq system.severity 3)}}selected{{/if}}>3 — Dying (–9)</option>
+          <option value="4" {{#if (qwEq system.severity 4)}}selected{{/if}}>4 — Dead</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>{{localize "QUESTWORLDS.Source"}}</label>
+        <input type="text" name="system.source" value="{{system.source}}" />
+      </div>
+      <div class="form-group">
+        <label>{{localize "QUESTWORLDS.Recovering"}}</label>
+        <input type="checkbox" name="system.recovering" {{#if system.recovering}}checked{{/if}} />
+      </div>
+    {{/if}}
+
+    {{!-- Benefit --}}
+    {{#if (qwEq item.type "benefit")}}
+      <div class="form-group">
+        <label>{{localize "QUESTWORLDS.Bonus"}}</label>
+        <input type="number" name="system.bonus" value="{{system.bonus}}" />
+      </div>
+      <div class="form-group">
+        <label>{{localize "QUESTWORLDS.ExpiresOn"}}</label>
+        <input type="text" name="system.expiresOn" value="{{system.expiresOn}}" />
+      </div>
+    {{/if}}
+
+    {{!-- Description (all types) --}}
+    <div class="form-group description-group">
+      <label>{{localize "QUESTWORLDS.Description"}}</label>
+      {{editor system.description target="system.description" button=true editable=true}}
+    </div>
+
+  </section>
+</form>

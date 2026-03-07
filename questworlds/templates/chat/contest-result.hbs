@@ -1,0 +1,46 @@
+<div class="questworlds-contest-result">
+  <h2>{{localize "QUESTWORLDS.ContestResult.Title"}} — {{abilityName}}</h2>
+  <div class="contest-summary">
+    <div class="contest-side">
+      <h3>{{localize "QUESTWORLDS.HeroDie"}}</h3>
+      <div><strong>{{heroRoll}}</strong> / {{heroTarget}} ({{heroLevelLabel}})</div>
+      <div class="contest-masteries">{{localize "QUESTWORLDS.Mastery"}} {{heroMasteries}}</div>
+    </div>
+    <div class="contest-side">
+      <h3>{{localize "QUESTWORLDS.Resistance"}}</h3>
+      <div><strong>{{oppRoll}}</strong> / {{oppTarget}} ({{oppLevelLabel}})</div>
+      <div class="contest-masteries">{{localize "QUESTWORLDS.Mastery"}} {{oppositionMasteries}}</div>
+    </div>
+  </div>
+  <div class="contest-outcome">
+    <strong>{{localize "QUESTWORLDS.ContestResult.Outcome"}}:</strong> {{outcome}}
+  </div>
+  {{#if autoSuccess}}
+    <div class="contest-narration">
+      <em>{{localize "QUESTWORLDS.ContestResult.AutoSuccess"}}</em>
+    </div>
+  {{/if}}
+  {{#if narration}}
+    <div class="contest-narration">
+      <em>{{narration}}</em>
+    </div>
+  {{/if}}
+  {{#if canReroll}}
+    <div class="contest-actions">
+      <a
+        class="button questworlds-reroll"
+        data-actor-id="{{actorId}}"
+        data-ability-id="{{abilityId}}"
+        data-resistance="{{oppTarget}}"
+        data-opposition-masteries="{{oppositionMasteries}}"
+      >
+        {{localize "QUESTWORLDS.ContestResult.RerollStoryPoint"}}
+      </a>
+    </div>
+  {{/if}}
+  {{#if spentStoryPoint}}
+    <div class="contest-storypoint">
+      <em>{{localize "QUESTWORLDS.ContestResult.SpentStoryPoint"}} ({{remainingStoryPoints}} {{localize "QUESTWORLDS.StoryPoints"}})</em>
+    </div>
+  {{/if}}
+</div>
