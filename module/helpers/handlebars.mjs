@@ -132,6 +132,8 @@ export async function preloadHandlebarsTemplates() {
     "systems/questworlds/templates/chat/contest-result.hbs",
     "systems/questworlds/templates/chat/contest-roll.hbs",
     "systems/questworlds/templates/scene/scene-tracker.hbs",
+    // Apps
+    "systems/questworlds/templates/apps/seed-content.hbs",
   ];
 
   return loadTemplates(templatePaths);

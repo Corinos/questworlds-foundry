@@ -6,17 +6,17 @@
  */
 
 export async function createHelpJournal() {
-  const title = game.i18n.localize("QUESTWORLDS.Help.Title");
+  const title = game.i18n.localize("QUESTWORLDS.HelpJournal.Title");
   const existing = game.journal.getName(title);
   if (existing) return existing;
 
   const content = `
   <h1>${title}</h1>
-  <p>${game.i18n.localize("QUESTWORLDS.Help.Intro")}</p>
-  <h2>${game.i18n.localize("QUESTWORLDS.Help.Contests")}</h2>
-  <p>${game.i18n.localize("QUESTWORLDS.Help.ContestsDesc")}</p>
-  <h2>${game.i18n.localize("QUESTWORLDS.Help.Advancement")}</h2>
-  <p>${game.i18n.localize("QUESTWORLDS.Help.AdvancementDesc")}</p>
+  <p>${game.i18n.localize("QUESTWORLDS.HelpJournal.Intro")}</p>
+  <h2>${game.i18n.localize("QUESTWORLDS.HelpJournal.Contests")}</h2>
+  <p>${game.i18n.localize("QUESTWORLDS.HelpJournal.ContestsDesc")}</p>
+  <h2>${game.i18n.localize("QUESTWORLDS.HelpJournal.Advancement")}</h2>
+  <p>${game.i18n.localize("QUESTWORLDS.HelpJournal.AdvancementDesc")}</p>
   `;
 
   return JournalEntry.create({ name: title, content });

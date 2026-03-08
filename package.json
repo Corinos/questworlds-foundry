@@ -16,8 +16,8 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.3",
     "@eslint/eslintrc": "^3.3.3",
+    "@eslint/js": "^9.39.3",
     "@typescript-eslint/eslint-plugin": "^8.56.0",
     "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^9.39.3",
@@ -30,5 +30,7 @@
     "vite-plugin-static-copy": "^3.2.0",
     "vitest": "^4.0.18"
   },
-  "dependencies": {}
+  "dependencies": {
+    "changeset": "^0.2.6"
+  }
 }

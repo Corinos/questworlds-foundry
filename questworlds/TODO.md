@@ -172,12 +172,12 @@
 - [x] System setting: configurable XP cost per advance
 
 **Polish**
-- [ ] Full localization pass — verify all strings in `en.json`
-- [ ] CSS polish — responsive layout, icon set, print stylesheet
+- [x] Full localization pass — verify all strings in `en.json`
+- [x] CSS polish — responsive layout, icon set, print stylesheet
 - [x] System settings:
   - [x] Default resistance (GM configurable)
-  - [ ] Toggle: Wagered Sequences enabled
-  - [ ] Toggle: Story Points enabled
+  - [x] Toggle: Wagered Sequences enabled
+  - [x] Toggle: Story Points enabled
   - [x] Toggle: Show resistance ladder reference panel
 
 ---

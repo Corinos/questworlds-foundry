@@ -120,17 +120,6 @@
     "ResistanceRating": "Resistance Rating",
     "NpcType":          "NPC Type",
 
-    "ContestResult": {
-      "Title": "Contest Result",
-      "Outcome": "Outcome",
-      "CompleteVictory":  "Complete Victory",
-      "MarginalVictory":  "Marginal Victory",
-      "MarginalDefeat":   "Marginal Defeat",
-      "CompleteDefeat":   "Complete Defeat",
-      "Tie":              "Tie",
-      "SpentStoryPoint":  "Spent a Story Point"
-    },
-
     "Roll": {
       "RollingFor":   "Rolling for",
       "vs":           "vs.",
@@ -254,14 +243,34 @@
     "HelpJournal": {
       "Title": "QuestWorlds Help",
       "Intro": "QuestWorlds is a narrative roleplaying system built around contests and story points. This journal provides a quick reference to the core rules and tools.",
-      "Contests": "Core contest resolution works by rolling 1d20 on both sides versus a target number. Use the contest dialog to pick an ability, set resistance, and apply modifiers.",
-      "Advancement": "Spend XP to advance your character: raise an existing ability, create a new breakout, standalone ability, or keyword. Use the Advance button on the character sheet.",
+      "Contests": "Contests",
+      "ContestsDesc": "Core contest resolution works by rolling 1d20 on both sides versus a target number. Use the contest dialog to pick an ability, set resistance, and apply modifiers.",
+      "Advancement": "Advancement",
+      "AdvancementDesc": "Spend XP to advance your character: raise an existing ability, create a new breakout, standalone ability, or keyword. Use the Advance button on the character sheet."
+    },
+
+    "Template": {
+      "BlankCharacter": "Blank Character Template",
+      "Created": "Created blank character template."
+    },
+
+    "SeedMenu": {
+      "Name": "Seed Content",
+      "Label": "Open Seed Content Tools",
+      "Button": "Seed Content",
+      "Hint": "Create starter characters, a blank character template, a help journal, and default macros."
     },
 
     "Seed": {
       "CreatedActors": "Created sample characters: {names}.",
       "TemplateCreated": "Created blank character template.",
+      "CreateSampleCharacters": "Create sample characters",
+      "CreateBlankTemplate": "Create blank character template",
+      "CreateHelpJournal": "Create help journal entry",
+      "CreateMacros": "Install default macros",
+      "SeedNote": "This tool creates or updates existing content; run it again to ensure the latest seeds are present."
     },
+
     "ResistanceRoll": {
       "Button": "Resistance Roller",
       "Title": "Resistance Roll",
@@ -277,11 +286,6 @@
     "Macros": {
       "NotGM": "Only the GM can create default macros.",
       "CreateResult": "Macro installation complete. {message}"
-    },
-
-    "Seed": {
-      "CreatedActors": "Created sample characters: {names}.",
-      "TemplateCreated": "Created blank character template."
     },
 
     "Settings": {
@@ -300,10 +304,13 @@
       "EnableStoryPoints": {
         "Name": "Enable Story Points",
         "Hint": "When disabled, story point rerolls and upgrades are not available in contests."
+      },
+      "XpCostPerAdvance": {
+        "Name": "XP Cost per Advance",
+        "Hint": "How much XP it costs to advance an ability (default 10)."
+      }
     },
-    "XpCostPerAdvance": {
-      "Name": "XP Cost per Advance",
-      "Hint": "How much XP it costs to advance an ability (default 10)."
+
     "NpcSheet": {
       "SelectHeroToken": "Select a player token to roll against this NPC.",
       "HeroNoAbilities": "The selected token has no abilities.",

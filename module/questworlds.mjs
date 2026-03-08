@@ -20,6 +20,7 @@ import {
 } from "./helpers/contest.mjs";
 import { createHelpJournal, createSampleCharacters, createBlankCharacterTemplate } from "./helpers/seed-content.mjs";
 import { QWSceneTracker } from "./apps/scene-tracker.mjs";
+import { SeedContentApp } from "./apps/seed-content-app.mjs";
 
 /* ------------------------------------------------------------------ */
 /*  Hooks: init                                                          */
@@ -70,6 +71,15 @@ Hooks.once("init", function () {
     config: true,
     type: Boolean,
     default: true,
+  });
+
+  game.settings.registerMenu("questworlds", "seedContent", {
+    name: "QUESTWORLDS.SeedMenu.Name",
+    label: "QUESTWORLDS.SeedMenu.Label",
+    hint: "QUESTWORLDS.SeedMenu.Hint",
+    icon: "fas fa-seedling",
+    type: SeedContentApp,
+    restricted: true,
   });
 
   game.settings.register("questworlds", "xpCostPerAdvance", {
@@ -232,6 +242,7 @@ Hooks.once("init", function () {
     openGroupContestDialog,
     runGroupContest,
     openSceneTracker: () => new QWSceneTracker().render(true),
+    openSeedContent: () => new SeedContentApp().render(true),
     rollResistance: () => {
       const result = rollRandomResistance();
       const label = game.i18n.localize(result.label);
@@ -463,6 +474,13 @@ Hooks.once("ready", function () {
     if (!tokenTools) return;
 
     tokenTools.tools.unshift(
+      {
+        name: "questworldsSeedContent",
+        title: game.i18n.localize("QUESTWORLDS.SeedMenu.Button"),
+        icon: "fas fa-seedling",
+        onClick: () => game.questworlds.openSeedContent(),
+        button: true,
+      },
       {
         name: "questworldsSceneTracker",
         title: game.i18n.localize("QUESTWORLDS.SceneTracker.Button"),

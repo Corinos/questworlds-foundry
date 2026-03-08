@@ -54,8 +54,11 @@ This system ships with helpers you can run in the Foundry Console to create star
 - Create a **help journal**: `game.questworlds.createHelpJournal()`
 - Create **sample characters** (archetypes): `game.questworlds.createSampleCharacters()`
 - Create a **blank character template**: `game.questworlds.createBlankCharacterTemplate()`
+- Open the **Seed Content UI**: `game.questworlds.openSeedContent()`
 
 These helpers create Actors/Journal entries in your World so you can start playing without building everything from scratch.
+
+> **Tip:** A UI is also available under Foundry Settings → Module Settings → QuestWorlds → **Seed Content**.
 
 ## Macro Helpers
 
