@@ -5,11 +5,10 @@
   "version": "0.1.0",
   "authors": [
     {
-      "name": "QuestWorlds System Developer",
-      "discord": ""
+      "name": "ScottlyMac"
     }
   ],
-  "url": "",
+
   "license": "LICENSE.txt",
   "readme": "README.md",
   "compatibility": {
@@ -39,7 +38,5 @@
   },
   "packs": [],
   "packFolders": [],
-  "socket": false,
-  "manifest": "",
-  "download": ""
+  "socket": false
 }
