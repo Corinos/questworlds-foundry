@@ -44,8 +44,30 @@ pnpm install
 | 4     | Augments, Story Points             | 🔜 Planned  |
 | 5     | Sequences (Scored & Wagered)       | 🔜 Planned  |
 | 6     | NPC & GM Tools                     | 🔜 Planned  |
-| 7     | XP, Advancement & Polish           | 🔜 Planned  |
-| 8     | Compendium & Documentation         | 🔜 Planned  |
+| 7     | XP, Advancement & Polish           | ✅ Complete |
+| 8     | Compendium & Documentation         | ✅ Complete (except submission) |
+
+## Quick Start (Seed Content)
+
+This system ships with helpers you can run in the Foundry Console to create starter content in your World.
+
+- Create a **help journal**: `game.questworlds.createHelpJournal()`
+- Create **sample characters** (archetypes): `game.questworlds.createSampleCharacters()`
+- Create a **blank character template**: `game.questworlds.createBlankCharacterTemplate()`
+
+These helpers create Actors/Journal entries in your World so you can start playing without building everything from scratch.
+
+## Macro Helpers
+
+The system also provides macros to quickly set up useful tools:
+
+- `game.questworlds.createDefaultMacros()` — creates macros for:
+  - Quick Contest Launcher
+  - Resistance Roller
+  - Award XP
+  - Scene Tracker
+
+Run the function once, then add the created macros to your hotbar.
 
 ---
 

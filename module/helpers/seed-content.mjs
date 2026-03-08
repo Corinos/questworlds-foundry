@@ -66,7 +66,16 @@ export async function createSampleCharacters() {
   for (const data of samples) {
     const existing = game.actors.getName(data.name);
     if (existing) continue;
+
     const actor = await Actor.create(data);
+
+    // Link a breakout to its keyword (if both exist)
+    const keyword = actor.items.find((i) => i.type === "ability" && i.system?.abilityType === "keyword");
+    const breakout = actor.items.find((i) => i.type === "ability" && i.system?.abilityType === "breakout");
+    if (keyword && breakout) {
+      await breakout.update({ "system.keywordId": keyword.id });
+    }
+
     created.push(actor.name);
   }
 

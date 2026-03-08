@@ -182,18 +182,18 @@
 
 ---
 
-## Phase 8 — Compendium & Documentation 🔜 PLANNED
+## Phase 8 — Compendium & Documentation ✅ COMPLETE (except submission)
 *Goal: Out-of-the-box playability.*
 
-- [ ] Sample pre-built characters (2–3 archetypes)
-- [ ] Blank character template Item compendium
-- [x] Macro compendium:
+- [x] Sample pre-built characters (2–3 archetypes)
+- [x] Blank character template (created via helper)
+- [x] Macro compendium (via helper):
   - [x] Quick Contest Launcher
   - [x] Resistance Roller (GM rolls random resistance from ladder)
   - [x] Award XP to selected tokens
   - [x] Scene Tracker launcher (GM tool)
-- [ ] In-system Help journal (QuestWorlds rules summary, how to use this system)
-- [ ] README update for public release
+- [x] In-system Help journal (QuestWorlds rules summary)
+- [x] README update for public release
 - [ ] Submit to Foundry package browser
 
 ---
