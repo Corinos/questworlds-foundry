@@ -1,0 +1,324 @@
+{
+  "QUESTWORLDS": {
+
+    "SheetCharacter": "QuestWorlds Character Sheet",
+    "SheetNpc":       "QuestWorlds NPC Sheet",
+    "SheetAbility":   "QuestWorlds Ability Sheet",
+
+    "TabAbilities": "Abilities",
+    "TabFlaws":     "Flaws",
+    "TabEffects":   "Effects",
+    "TabNotes":     "Notes",
+
+    "Abilities":  "Abilities",
+    "Flaws":      "Flaws",
+    "Keywords":   "Keywords",
+    "Breakouts":  "Breakouts",
+    "Standalone": "Standalone",
+
+    "NoAbilities": "No abilities. Click + to add one.",
+    "NoFlaws":     "No flaws recorded.",
+    "EmptyKeywords": "No keywords yet. Create one to start building your character.",
+    "EmptyStandalones": "No standalone abilities yet. Add one to get started.",
+    "EmptyConsequences": "No consequences. You’re clean and healthy.",
+    "EmptyBenefits": "No benefits active.",
+    "EmptyBreakouts": "No breakouts yet — add one to this keyword.",
+
+    "AddAbility":  "Add Ability",
+    "AddKeyword":  "Add Keyword",
+    "AddBreakout": "Add Breakout",
+    "Edit": "Edit",
+    "Delete": "Delete",
+
+    "NewItem": "New {type}",
+
+    "Rating":       "Rating",
+    "AbilityType":  "Ability Type",
+    "BreakoutBonus":"Breakout Bonus",
+    "Description":  "Description",
+    "Severity":     "Severity",
+    "Source":       "Source",
+    "Recovering":   "Recovering",
+    "Bonus":        "Bonus Amount",
+    "ExpiresOn":    "Expires When",
+
+    "Occupation": "Occupation",
+    "Community":  "Community",
+    "Homeland":   "Homeland",
+
+    "StoryPoints":       "Story Points",
+    "StoryPointSpend":   "Spend a Story Point",
+
+    "Experience": "Experience",
+    "DecreaseExperience": "Decrease",
+    "IncreaseExperience": "Increase",
+    "Advances": "Advances",
+
+    "Advancement": {
+      "Heading": "Advance",
+      "Title": "Advance an Ability",
+      "ActionLabel": "Action",
+      "Action": {
+        "Raise": "Raise an ability",
+        "Breakout": "Add a breakout",
+        "Standalone": "Add a standalone ability",
+        "Keyword": "Add a new keyword"
+      },
+      "ChooseAbility": "Choose an ability to advance",
+      "ChooseKeyword": "Choose a keyword for the breakout",
+      "NewName": "Name for the new ability/keyword",
+      "Advance": "Advance",
+      "NotEnoughXp": "Not enough XP (10 XP required).",
+      "NoAbilities": "No abilities available to advance.",
+      "NoKeywords": "No keywords available to attach a breakout to.",
+      "EnterName": "Enter a name for the new ability or keyword.",
+      "Result": "{name} advanced to {newRating} (spent {cost} XP).",
+      "Created": "Created {name} (spent {cost} XP).",
+      "HistoryTitle": "Advance: {name}",
+      "HistoryEntry": "<p><strong>Actor:</strong> {actor}</p><p><strong>Action:</strong> {action}</p><p><strong>Name:</strong> {name}</p><p><strong>XP Spent:</strong> {cost}</p>"
+    },
+
+    "PenaltyTotal": "Penalty Total",
+    "BonusTotal": "Bonus Total",
+    "NextContestEffects": "Next-contest effects",
+    "NextContestEffects.ClearTitle": "Clear next-contest effects",
+    "NextContestEffects.ClearPrompt": "Are you sure you want to remove all temporary effects that expire after the next contest?",
+    "NextContestEffects.ClearConfirm": "Clear",
+    "NextContestEffects.ClearCancel": "Cancel",
+    "ResolutionPoints": "Resolution Points",
+    "IncreaseResolution": "Increase",
+    "DecreaseResolution": "Decrease",
+
+    "Consequences": "Consequences",
+    "Benefits":     "Benefits",
+
+    "Consequence": {
+      "Hurt":    "Hurt",
+      "Injured": "Injured",
+      "Dying":   "Dying",
+      "Dead":    "Dead"
+    },
+
+    "ResistanceLadder": {
+      "Automatic":     "Automatic (no roll)",
+      "VeryEasy":      "Very Easy — 6",
+      "Easy":          "Easy — 9",
+      "Moderate":      "Moderate — 14",
+      "Hard":          "Hard — 18",
+      "VeryHard":      "Very Hard — 1M",
+      "Formidable":    "Formidable — 5M",
+      "Stiff":         "Stiff — 10M",
+      "VeryStiff":     "Very Stiff — 15M",
+      "Overwhelming":  "Overwhelming — 1M2"
+    },
+    "ResistanceObstacle": {
+      "LockedDoor": "Locked Door — 14",
+      "Guard": "Guard — 18",
+      "Storm": "Storm / Hazard — 20"
+    },
+
+    "ResistanceRating": "Resistance Rating",
+    "NpcType":          "NPC Type",
+
+    "ContestResult": {
+      "Title": "Contest Result",
+      "Outcome": "Outcome",
+      "CompleteVictory":  "Complete Victory",
+      "MarginalVictory":  "Marginal Victory",
+      "MarginalDefeat":   "Marginal Defeat",
+      "CompleteDefeat":   "Complete Defeat",
+      "Tie":              "Tie",
+      "SpentStoryPoint":  "Spent a Story Point"
+    },
+
+    "Roll": {
+      "RollingFor":   "Rolling for",
+      "vs":           "vs.",
+      "Resistance":   "Resistance",
+      "HeroDie":      "Hero Roll",
+      "OppositionDie":"Opposition Roll",
+      "Mastery":      "Mastery",
+      "Bump":         "Bump!"
+    },
+    "RollAbility": "Roll ability",
+    "RollNotImplemented": "Roll is not implemented yet (placeholder).",
+
+    "ContestDialog": {
+      "Title": "Contest",
+      "Attacker": "Attacker",
+      "Resistance": "Resistance TN",
+      "OppositionMasteries": "Opposition Masteries",
+      "Augment": "Augment Ability",
+      "None": "None",
+      "ApplyModifiers": "Apply consequences & benefits",
+      "SituationalModifier": "Situational Modifier",
+      "SituationalModifierHelp": "Use for temporary bonuses/penalties (e.g. cover, terrain, morale)",
+      "Wager": "Wager RP",
+      "WagerHelp": "You can wager RP to multiply the result (higher risk/reward).",
+      "Roll": "Roll"
+    },
+
+    "GroupContest": {
+      "Title": "Group Contest",
+      "DialogTitle": "Group Contest",
+      "ChooseAbility": "Use ability",
+      "Resistance": "Resistance TN",
+      "NoTokens": "Select one or more tokens to run a group contest.",
+      "NoActors": "Selected tokens do not have linked actors.",
+      "NoAbilities": "The primary actor has no abilities to roll.",
+      "Outcome": "Group Outcome"
+    },
+
+    "ContestLauncher": {
+      "Title": "Quick Contest Launcher",
+      "NoToken": "Select a token with a character actor to start a contest.",
+      "NoAbilities": "The selected actor has no abilities to roll.",
+      "ChooseAbility": "Choose an ability to roll"
+    },
+
+    "ContestRoll": {
+      "Title": "Contest Roll",
+      "Hero": "Hero",
+      "Opposition": "Opposition",
+      "Augment": "Augment",
+      "Bonus": "Bonus",
+      "Modifiers": "Modifiers",
+      "Situational": "Situational"
+    },
+    "ContestResult": {
+      "Title": "Contest Result",
+      "Outcome": "Outcome",
+      "CompleteVictory":  "Complete Victory",
+      "MarginalVictory":  "Marginal Victory",
+      "MarginalDefeat":   "Marginal Defeat",
+      "CompleteDefeat":   "Complete Defeat",
+      "Tie":              "Tie",
+      "SpentStoryPoint":  "Spent a Story Point",
+      "AutoSuccess": "Automatic success (no roll needed)",
+      "AutoSuccessNote": "This contest was resolved automatically due to auto-success.",
+      "Narration": {
+        "CompleteVictory": "The hero dominates the challenge!",
+        "MarginalVictory": "The hero scrapes through with a win.",
+        "Tie": "Both sides stand their ground.",
+        "MarginalDefeat": "The hero is pushed back this time.",
+        "CompleteDefeat": "The challenge overwhelms the hero."
+      },
+      "RerollStoryPoint": "Spend 1 Story Point to reroll",
+      "ApplyRp": "Apply Resolution Points"
+    },
+
+    "Sequence": {
+      "Success": "The sequence is complete! You achieved your goal.",
+      "Failure": "The sequence ends in failure and the situation slips away.",
+      "StrongSuccess": "You claim a resounding victory. This feels like a strong outcome.",
+      "WeakSuccess": "You barely get there, but you succeed.",
+      "WeakFailure": "You falter and fail, but it isn’t total collapse.",
+      "StrongFailure": "You crash hard; the setback is significant."
+    },
+
+    "SequenceEffect": {
+      "Source": "Sequence outcome",
+      "Applied": "Applied",
+      "Name": {
+        "StrongSuccess": "Momentum (Strong Success)",
+        "WeakSuccess": "Momentum (Success)",
+        "WeakFailure": "Injury (Failure)",
+        "StrongFailure": "Serious Injury (Defeat)"
+      },
+      "Description": {
+        "StrongSuccess": "You gain a strong bonus for upcoming actions.",
+        "WeakSuccess": "You gain a small bonus for upcoming actions.",
+        "WeakFailure": "You suffer a light consequence from the setback.",
+        "StrongFailure": "You suffer a serious consequence from the setback."
+      }
+    },
+
+    "Notifications": {
+      "RequestSent": "Request sent to the GM. They can approve and apply the effect."
+    },
+
+    "SceneTracker": {
+      "Title": "Scene Tracker",
+      "Button": "Scene Tracker",
+      "Help": "Lists active consequences for all tokens on the current scene.",
+      "NoConsequences": "No active consequences are present on any tokens.",
+      "NoConsequencesForToken": "No consequences on this token.",
+      "Source": "Source",
+      "GMOnly": "Only the GM can view the scene tracker.",
+      "ClearButton": "Clear all consequences from this token",
+      "ClearTitle": "Clear Consequences",
+      "ClearPrompt": "Remove all consequences from this token? This cannot be undone.",
+      "ClearConfirm": "Clear",
+      "ClearCancel": "Cancel"
+    },
+    "HelpJournal": {
+      "Title": "QuestWorlds Help",
+      "Intro": "QuestWorlds is a narrative roleplaying system built around contests and story points. This journal provides a quick reference to the core rules and tools.",
+      "Contests": "Core contest resolution works by rolling 1d20 on both sides versus a target number. Use the contest dialog to pick an ability, set resistance, and apply modifiers.",
+      "Advancement": "Spend XP to advance your character: raise an existing ability, create a new breakout, standalone ability, or keyword. Use the Advance button on the character sheet.",
+    },
+
+    "Seed": {
+      "CreatedActors": "Created sample characters: {names}.",
+      "TemplateCreated": "Created blank character template.",
+    },
+    "ResistanceRoll": {
+      "Button": "Resistance Roller",
+      "Title": "Resistance Roll",
+      "Result": "Rolled: {{label}} (TN {{resistance}})."
+    },
+
+    "AwardXp": {
+      "NoToken": "Select one or more tokens to award XP.",
+      "NoActors": "No character actors are selected.",
+      "Notice": "Awarded {amount} XP to {count} character(s)."
+    },
+
+    "Macros": {
+      "NotGM": "Only the GM can create default macros.",
+      "CreateResult": "Macro installation complete. {message}"
+    },
+
+    "Seed": {
+      "CreatedActors": "Created sample characters: {names}.",
+      "TemplateCreated": "Created blank character template."
+    },
+
+    "Settings": {
+      "DefaultResistance": {
+        "Name": "Default Resistance",
+        "Hint": "The default resistance target number used when no token resistance is selected."
+      },
+      "ShowResistanceLadder": {
+        "Name": "Show Resistance Ladder",
+        "Hint": "When enabled, the contest dialog includes a quick reference list of common resistance TNs."
+      },
+      "EnableWageredSequences": {
+        "Name": "Enable Wagered Sequences",
+        "Hint": "When disabled, the wager field is hidden and RP awards are not multiplied."
+      },
+      "EnableStoryPoints": {
+        "Name": "Enable Story Points",
+        "Hint": "When disabled, story point rerolls and upgrades are not available in contests."
+    },
+    "XpCostPerAdvance": {
+      "Name": "XP Cost per Advance",
+      "Hint": "How much XP it costs to advance an ability (default 10)."
+    "NpcSheet": {
+      "SelectHeroToken": "Select a player token to roll against this NPC.",
+      "HeroNoAbilities": "The selected token has no abilities.",
+      "SelectHeroAbility": "Choose which ability the player should roll.",
+      "HeroAbility": "Player Ability",
+      "SelectHeroAbilityTitle": "Choose a Player Ability"
+    },
+
+    "Confirm": "Confirm",
+    "Cancel": "Cancel",
+    "ItemType": {
+      "ability":     "Ability",
+      "flaw":        "Flaw",
+      "benefit":     "Benefit",
+      "consequence": "Consequence"
+    }
+  }
+}

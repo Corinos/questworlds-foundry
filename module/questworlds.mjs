@@ -18,6 +18,7 @@ import {
   runGroupContest,
   rollRandomResistance,
 } from "./helpers/contest.mjs";
+import { createHelpJournal, createSampleCharacters, createBlankCharacterTemplate } from "./helpers/seed-content.mjs";
 import { QWSceneTracker } from "./apps/scene-tracker.mjs";
 
 /* ------------------------------------------------------------------ */
@@ -69,6 +70,16 @@ Hooks.once("init", function () {
     config: true,
     type: Boolean,
     default: true,
+  });
+
+  game.settings.register("questworlds", "xpCostPerAdvance", {
+    name: "QUESTWORLDS.Settings.XpCostPerAdvance.Name",
+    hint: "QUESTWORLDS.Settings.XpCostPerAdvance.Hint",
+    scope: "world",
+    config: true,
+    type: Number,
+    range: { min: 0, max: 100, step: 1 },
+    default: 10,
   });
 
   // Expose system namespace on the global game object for convenience
@@ -241,6 +252,9 @@ Hooks.once("init", function () {
     },
     awardXp: awardXpToSelected,
     createDefaultMacros,
+    createHelpJournal,
+    createSampleCharacters,
+    createBlankCharacterTemplate,
   };
 
   // ---- Data Models ------------------------------------------------
