@@ -25,6 +25,8 @@ import { SeedContentApp } from "./apps/seed-content-app.mjs";
 /* ------------------------------------------------------------------ */
 /*  Hooks: init                                                          */
 /* ------------------------------------------------------------------ */
+console.log("questworlds.mjs is loading!");
+
 Hooks.once("init", function () {
   const major = Number(game.version?.split?.[0] ?? 0);
   if (major && major !== 13) {
