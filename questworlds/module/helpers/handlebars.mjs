@@ -131,6 +131,7 @@ export async function preloadHandlebarsTemplates() {
     // Chat partials
     "systems/questworlds/templates/chat/contest-result.hbs",
     "systems/questworlds/templates/chat/contest-roll.hbs",
+    "systems/questworlds/templates/scene/scene-tracker.hbs",
   ];
 
   return loadTemplates(templatePaths);

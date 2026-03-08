@@ -2,6 +2,9 @@
  * QuestWorlds — Character Sheet
  * Full implementation in Phase 3. This stub ensures the system loads cleanly.
  */
+
+import { EXPIRES_NEXT_CONTEST } from "../helpers/contest.mjs";
+
 export class QWCharacterSheet extends ActorSheet {
 
   /** @inheritDoc */
@@ -37,6 +40,19 @@ export class QWCharacterSheet extends ActorSheet {
     context.isOwner     = actor.isOwner;
     context.isGM        = game.user.isGM;
 
+    // Track active effects that expire after the next contest.
+    context.nextContestEffects = actor.items
+      .filter((i) =>
+        (i.type === "benefit" || i.type === "consequence") &&
+        i.system.expiresOn === EXPIRES_NEXT_CONTEST,
+      )
+      .map((i) => ({
+        id: i.id,
+        name: i.name,
+        type: i.type,
+        description: i.system.description,
+      }));
+
     // Annotate each breakout with its actor-derived effectiveRating so
     // templates can use breakout.effectiveRating directly without reaching
     // into actor internals or calling a helper method from HBS.
@@ -70,6 +86,7 @@ export class QWCharacterSheet extends ActorSheet {
     // XP / Advances controls
     html.find(".xp-increment").click(this._onXpIncrement.bind(this));
     html.find(".xp-decrement").click(this._onXpDecrement.bind(this));
+    html.find(".xp-advance").click(this._onAdvanceAbility.bind(this));
 
     // Resolution Points (for sequences)
     html.find(".rp-increment").click(this._onRpIncrement.bind(this));
@@ -77,6 +94,9 @@ export class QWCharacterSheet extends ActorSheet {
 
     // Roll placeholder
     html.find(".ability-roll").click(this._onAbilityRoll.bind(this));
+
+    // Next-contest effect clear
+    html.find(".next-contest-clear").click(this._onClearNextContestEffects.bind(this));
 
     // Drag-to-reorder
     html.find("[draggable=true]").on("dragstart", this._onDragStart.bind(this));
@@ -161,6 +181,188 @@ export class QWCharacterSheet extends ActorSheet {
     await this.actor.update({ "system.experience.value": newValue });
   }
 
+  async _onAdvanceAbility() {
+    const actor = this.actor;
+    const xp = actor.system.experience.value ?? 0;
+    const cost = 10;
+    const bump = 5;
+
+    if (xp < cost) {
+      ui.notifications.warn(game.i18n.localize("QUESTWORLDS.Advancement.NotEnoughXp"));
+      return;
+    }
+
+    const abilities = actor.items.filter((i) => i.type === "ability");
+    const keywords = abilities.filter((i) => i.system.abilityType === "keyword");
+
+    const abilityOptions = abilities
+      .map((ability) => `<option value="${ability.id}">${ability.name}</option>`)
+      .join("");
+    const keywordOptions = keywords
+      .map((keyword) => `<option value="${keyword.id}">${keyword.name}</option>`)
+      .join("");
+
+    new Dialog({
+      title: game.i18n.localize("QUESTWORLDS.Advancement.Title"),
+      content: `
+        <form>
+          <div class="form-group">
+            <label>${game.i18n.localize("QUESTWORLDS.Advancement.ActionLabel")}</label>
+            <select name="action" id="action">
+              <option value="raise">${game.i18n.localize("QUESTWORLDS.Advancement.Action.Raise")}</option>
+              <option value="breakout">${game.i18n.localize("QUESTWORLDS.Advancement.Action.Breakout")}</option>
+              <option value="standalone">${game.i18n.localize("QUESTWORLDS.Advancement.Action.Standalone")}</option>
+              <option value="keyword">${game.i18n.localize("QUESTWORLDS.Advancement.Action.Keyword")}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>${game.i18n.localize("QUESTWORLDS.Advancement.ChooseAbility")}</label>
+            <select name="ability" id="ability">${abilityOptions}</select>
+          </div>
+
+          <div class="form-group">
+            <label>${game.i18n.localize("QUESTWORLDS.Advancement.ChooseKeyword")}</label>
+            <select name="keyword" id="keyword">${keywordOptions}</select>
+          </div>
+
+          <div class="form-group">
+            <label>${game.i18n.localize("QUESTWORLDS.Advancement.NewName")}</label>
+            <input name="name" id="name" type="text" placeholder="" />
+          </div>
+        </form>
+      `,
+      buttons: {
+        advance: {
+          icon: "fas fa-level-up-alt",
+          label: game.i18n.localize("QUESTWORLDS.Advancement.Advance"),
+          callback: async (html) => {
+            const action = html.find("select[name=action]").val();
+            const abilityId = html.find("select[name=ability]").val();
+            const keywordId = html.find("select[name=keyword]").val();
+            const name = (html.find("input[name=name]").val() || "").trim();
+
+            const updateXp = () =>
+              actor.update({
+                "system.experience.value": xp - cost,
+                "system.experience.advances": (actor.system.experience.advances ?? 0) + 1,
+              });
+
+            if (action === "raise") {
+              const ability = actor.items.get(abilityId);
+              if (!ability) return;
+
+              const currentRating = ability.system?.rating ?? 0;
+              const newRating = Math.min(100, currentRating + bump);
+
+              await Promise.all([updateXp(), ability.update({ "system.rating": newRating })]);
+              ui.notifications.info(
+                game.i18n.format("QUESTWORLDS.Advancement.Result", {
+                  name: ability.name,
+                  cost,
+                  newRating,
+                }),
+              );
+            } else if (action === "breakout") {
+              const keyword = actor.items.get(keywordId);
+              if (!keyword) {
+                ui.notifications.warn(game.i18n.localize("QUESTWORLDS.Advancement.NoKeywords"));
+                return;
+              }
+
+              if (!name) {
+                ui.notifications.warn(game.i18n.localize("QUESTWORLDS.Advancement.EnterName"));
+                return;
+              }
+
+              await Promise.all([
+                updateXp(),
+                actor.createEmbeddedDocuments("Item", [
+                  {
+                    name,
+                    type: "ability",
+                    system: {
+                      rating: 13,
+                      abilityType: "breakout",
+                      keywordId: keyword.id,
+                      breakoutBonus: bump,
+                    },
+                  },
+                ]),
+              ]);
+
+              ui.notifications.info(
+                game.i18n.format("QUESTWORLDS.Advancement.Created", {
+                  name,
+                  cost,
+                }),
+              );
+            } else if (action === "standalone") {
+              if (!name) {
+                ui.notifications.warn(game.i18n.localize("QUESTWORLDS.Advancement.EnterName"));
+                return;
+              }
+
+              await Promise.all([
+                updateXp(),
+                actor.createEmbeddedDocuments("Item", [
+                  {
+                    name,
+                    type: "ability",
+                    system: {
+                      rating: 13,
+                      abilityType: "standalone",
+                    },
+                  },
+                ]),
+              ]);
+
+              ui.notifications.info(
+                game.i18n.format("QUESTWORLDS.Advancement.Created", {
+                  name,
+                  cost,
+                }),
+              );
+            } else if (action === "keyword") {
+              if (!name) {
+                ui.notifications.warn(game.i18n.localize("QUESTWORLDS.Advancement.EnterName"));
+                return;
+              }
+
+              await Promise.all([
+                updateXp(),
+                actor.createEmbeddedDocuments("Item", [
+                  {
+                    name,
+                    type: "ability",
+                    system: {
+                      rating: 13,
+                      abilityType: "keyword",
+                    },
+                  },
+                ]),
+              ]);
+
+              ui.notifications.info(
+                game.i18n.format("QUESTWORLDS.Advancement.Created", {
+                  name,
+                  cost,
+                }),
+              );
+            }
+
+            this.render();
+          },
+        },
+        cancel: {
+          icon: "fas fa-times",
+          label: game.i18n.localize("QUESTWORLDS.Cancel"),
+        },
+      },
+      default: "advance",
+    }).render(true);
+  }
+
   async _onRpIncrement() {
     const current = this.actor.system.resolutionPoints.value ?? 0;
     const max = this.actor.system.resolutionPoints.max ?? 0;
@@ -172,6 +374,45 @@ export class QWCharacterSheet extends ActorSheet {
     const current = this.actor.system.resolutionPoints.value ?? 0;
     const next = Math.max(0, current - 1);
     await this.actor.update({ "system.resolutionPoints.value": next });
+  }
+
+  async _onClearNextContestEffects() {
+    if (!(game.user.isGM || this.actor.isOwner)) return;
+
+    const toRemove = this.actor.items
+      .filter((i) =>
+        (i.type === "benefit" || i.type === "consequence") &&
+        i.system.expiresOn === EXPIRES_NEXT_CONTEST,
+      )
+      .map((i) => i.id);
+
+    if (!toRemove.length) return;
+
+    const confirmed = await new Promise((resolve) => {
+      new Dialog({
+        title: game.i18n.localize("QUESTWORLDS.NextContestEffects.ClearTitle"),
+        content: `<p>${game.i18n.localize(
+          "QUESTWORLDS.NextContestEffects.ClearPrompt",
+        )}</p>`,
+        buttons: {
+          yes: {
+            icon: "fas fa-check",
+            label: game.i18n.localize("QUESTWORLDS.NextContestEffects.ClearConfirm"),
+            callback: () => resolve(true),
+          },
+          no: {
+            icon: "fas fa-times",
+            label: game.i18n.localize("QUESTWORLDS.NextContestEffects.ClearCancel"),
+            callback: () => resolve(false),
+          },
+        },
+        default: "no",
+        close: () => resolve(false),
+      }).render(true);
+    });
+
+    if (!confirmed) return;
+    await this.actor.deleteEmbeddedDocuments("Item", toRemove);
   }
 
   async _onItemCreate(event) {

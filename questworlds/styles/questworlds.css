@@ -207,6 +207,67 @@
   color: var(--qw-color-accent);
 }
 
+.questworlds .next-contest-effects {
+  margin-top: 10px;
+  padding: 8px;
+  border: 1px dashed var(--qw-color-border);
+  border-radius: var(--qw-border-radius);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.85em;
+}
+
+.questworlds .next-contest-effect {
+  margin-top: 4px;
+}
+
+.questworlds .next-contest-effect--benefit {
+  color: var(--qw-color-accent);
+}
+
+.questworlds .next-contest-effect--consequence {
+  color: var(--qw-color-flaw);
+}
+
+.questworlds .next-contest-effect__desc {
+  font-size: 0.8em;
+  color: var(--qw-color-muted);
+  margin-top: 2px;
+}
+
+/* ---- Token HUD RP bar ------------------------------------- */
+.questworlds-token-rp {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 4px 6px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.75em;
+}
+
+.questworlds-token-rp-bar {
+  position: relative;
+  width: 72px;
+  height: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.questworlds-token-rp-fill {
+  height: 100%;
+  background: rgba(122, 44, 44, 0.85);
+  transition: width 0.2s ease;
+}
+
+.questworlds-token-rp-label {
+  min-width: 40px;
+  text-align: right;
+}
+
 /* ---- Drag to reorder --------------------------------------- */
 .questworlds .ability-row[draggable="true"] {
   cursor: grab;
@@ -250,6 +311,29 @@
   margin: 0 0 8px;
   font-size: 1.1em;
   color: var(--qw-color-primary);
+}
+
+.questworlds-group-contest {
+  padding: 10px;
+  border: 1px solid var(--qw-color-border);
+  border-radius: var(--qw-border-radius);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.questworlds-group-contest h2 {
+  margin: 0 0 8px;
+  font-size: 1.1em;
+  color: var(--qw-color-primary);
+}
+
+.questworlds-group-contest ul {
+  margin: 8px 0;
+  padding-left: 18px;
+}
+
+.questworlds-group-contest-outcome {
+  margin-top: 8px;
+  font-weight: bold;
 }
 
 .questworlds-sequence-end {
@@ -729,3 +813,131 @@
 .questworlds.chat-card .outcome.marginal-victory  { background: #e8f4c8; color: #3a5c1a; }
 .questworlds.chat-card .outcome.marginal-defeat   { background: #f4eac8; color: #5c3a1a; }
 .questworlds.chat-card .outcome.complete-defeat   { background: #f4c8c8; color: #5c1a1a; }
+
+.questworlds-resistance-roll {
+  padding: 10px;
+  border: 1px solid var(--qw-color-border);
+  border-radius: var(--qw-border-radius);
+  background: rgba(255, 255, 255, 0.95);
+  font-family: var(--qw-font-ui);
+}
+
+.questworlds-resistance-roll h2 {
+  margin: 0 0 8px;
+  font-size: 1.1em;
+  color: var(--qw-color-primary);
+}
+
+/* ---- Scene Tracker (GM only) ------------------------------- */
+.questworlds-scene-tracker {
+  font-family: var(--qw-font-ui);
+  padding: 12px;
+}
+
+.questworlds-scene-tracker .help-text {
+  font-size: 0.9em;
+  color: var(--qw-color-muted);
+  margin-bottom: 10px;
+}
+
+.qw-scene-token-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.qw-scene-token {
+  border: 1px solid var(--qw-color-border);
+  border-radius: var(--qw-border-radius);
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.qw-scene-token.hidden {
+  opacity: 0.6;
+}
+
+.qw-scene-token-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.qw-scene-token-img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border: 1px solid var(--qw-color-border);
+  border-radius: 4px;
+}
+
+.qw-scene-token-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.qw-scene-token-name {
+  font-weight: bold;
+  color: var(--qw-color-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qw-scene-token-actor {
+  font-size: 0.85em;
+  color: var(--qw-color-muted);
+}
+
+.questworlds-clear-consequences {
+  border: none;
+  background: transparent;
+  color: var(--qw-color-flaw);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.questworlds-clear-consequences:hover {
+  background: rgba(122, 74, 74, 0.2);
+}
+
+.qw-consequence-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.qw-consequence {
+  padding: 6px 8px;
+  border-top: 1px solid rgba(139, 115, 85, 0.25);
+}
+
+.qw-consequence:first-child {
+  border-top: none;
+}
+
+.qw-consequence-severity {
+  font-size: 0.85em;
+  color: var(--qw-color-muted);
+}
+
+.qw-consequence-desc {
+  font-size: 0.85em;
+  margin-top: 4px;
+}
+
+.qw-consequence-source {
+  font-size: 0.8em;
+  color: var(--qw-color-muted);
+  margin-top: 4px;
+}
+
+.qw-consequence-empty {
+  font-size: 0.9em;
+  color: var(--qw-color-muted);
+  padding: 8px;
+}

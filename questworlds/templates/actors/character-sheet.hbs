@@ -44,6 +44,7 @@
           <button type="button" class="xp-decrement" title="{{localize "QUESTWORLDS.DecreaseExperience"}}">−</button>
           <span class="xp-value">{{system.experience.value}}</span>
           <button type="button" class="xp-increment" title="{{localize "QUESTWORLDS.IncreaseExperience"}}">+</button>
+          <button type="button" class="xp-advance" title="{{localize "QUESTWORLDS.Advancement.Heading"}}">⇧</button>
         </div>
         <span class="xp-advances">{{localize "QUESTWORLDS.Advances"}}: {{system.experience.advances}}</span>
       </div>
@@ -64,6 +65,28 @@
         <span class="penalty">{{localize "QUESTWORLDS.PenaltyTotal"}}: {{system.penaltyTotal}}</span>
         <span class="bonus">{{localize "QUESTWORLDS.BonusTotal"}}: +{{system.bonusTotal}}</span>
       </div>
+
+      {{!-- Next-contest temporary effects --}}
+      {{#if nextContestEffects.length}}
+        <div class="next-contest-effects">
+          <div class="next-contest-effects__header">
+            <strong>{{localize "QUESTWORLDS.NextContestEffects"}}</strong>
+            {{#if (or isOwner isGM)}}
+              <button type="button" class="next-contest-clear" title="{{localize "QUESTWORLDS.NextContestEffects.Clear"}}">
+                <i class="fas fa-trash"></i>
+              </button>
+            {{/if}}
+          </div>
+          <ul>
+            {{#each nextContestEffects as |effect|}}
+              <li class="next-contest-effect next-contest-effect--{{effect.type}}">
+                <strong>{{effect.name}}</strong>
+                {{#if effect.description}}<div class="next-contest-effect__desc">{{{effect.description}}}</div>{{/if}}
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
 
     </div>
   </header>

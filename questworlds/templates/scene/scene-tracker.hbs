@@ -1,0 +1,43 @@
+<div class="questworlds-scene-tracker">
+  {{#if isGM}}
+    {{#if hasConsequences}}
+      <p class="help-text">{{localize "QUESTWORLDS.SceneTracker.Help"}}</p>
+      <ul class="qw-scene-token-list">
+        {{#each tokens as |token|}}
+          <li class="qw-scene-token {{#if token.isHidden}}hidden{{/if}}">
+            <div class="qw-scene-token-header">
+              <img class="qw-scene-token-img" src="{{token.img}}" alt="" />
+              <div class="qw-scene-token-info">
+                <div class="qw-scene-token-name">{{token.name}}</div>
+                <div class="qw-scene-token-actor">{{token.actorName}}</div>
+              </div>
+              {{#if token.consequences.length}}
+                <button type="button" class="questworlds-clear-consequences" data-token-id="{{token.id}}" title="{{localize "QUESTWORLDS.SceneTracker.ClearButton"}}">
+                  <i class="fas fa-trash"></i>
+                </button>
+              {{/if}}
+            </div>
+
+            {{#if token.consequences.length}}
+              <ul class="qw-consequence-list">
+                {{#each token.consequences as |con|}}
+                  <li class="qw-consequence">
+                    <strong>{{con.name}}</strong> <span class="qw-consequence-severity">({{qwSeverityLabel con.severity}})</span>
+                    <div class="qw-consequence-desc">{{con.description}}</div>
+                    {{#if con.source}}<div class="qw-consequence-source">{{localize "QUESTWORLDS.SceneTracker.Source"}}: {{con.source}}</div>{{/if}}
+                  </li>
+                {{/each}}
+              </ul>
+            {{else}}
+              <div class="qw-consequence-empty">{{localize "QUESTWORLDS.SceneTracker.NoConsequencesForToken"}}</div>
+            {{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <p class="help-text">{{localize "QUESTWORLDS.SceneTracker.NoConsequences"}}</p>
+    {{/if}}
+  {{else}}
+    <p class="help-text">{{localize "QUESTWORLDS.SceneTracker.GMOnly"}}</p>
+  {{/if}}
+</div>

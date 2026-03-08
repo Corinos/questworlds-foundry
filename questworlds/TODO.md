@@ -129,52 +129,56 @@
 - [x] RP award by outcome: Complete Victory +2 / Marginal Victory +1 / Tie 0 / Marginal Defeat −1 / Complete Defeat −2 (apply via chat button)
 - [x] Sequence end detection: RP reaches 0 (failure) or max (success)
 - [x] Final consequence determined by sequence outcome degree
+- [x] Sequence-end consequences/boons automatically applied (expires next contest)
+- [x] Sheet displays active next-contest effects (benefits/consequences)
+- [x] Allow clearing next-contest effects from sheet (owner/GM)
 
 **Group Simple Contest**
-- [ ] Each PC rolls vs shared resistance
-- [ ] Tally outcomes: count victories vs defeats
-- [ ] Group outcome: majority wins; tie = marginal result
+- [x] Each PC rolls vs shared resistance (via `game.questworlds.runGroupContest`)
+- [x] Tally outcomes: count victories vs defeats
+- [x] Group outcome: majority wins; tie = marginal result (presentation needs refinement)
+- [x] GM dialog to run group contest (`game.questworlds.openGroupContestDialog()`)
 
 **Wagered Sequence**
-- [ ] Bet RP before each exchange
-- [ ] Wager doubles losses/gains for that exchange
+- [x] Bet RP before each exchange (wager field in contest dialog)
+- [x] Wager doubles losses/gains for that exchange (multiplier applied to RP delta)
 
 **Token Integration**
-- [ ] Token resource bar mapped to RP during active sequence
+- [x] Token resource bar mapped to RP during active sequence
 
 ---
 
 ## Phase 6 — NPC Sheet & GM Tools 🔜 PLANNED
 *Goal: GM-facing tooling for running encounters.*
 
-- [ ] Full NPC sheet layout with named abilities for group contests
+- [x] Full NPC sheet layout with named abilities for group contests
 - [x] Resistance Ladder quick-reference panel (clickable to set resistance in roll dialog)
 - [x] GM roll: click NPC ability/resistance → fires contest as opposition
-- [ ] Compendium: default resistance values for common obstacle types
-- [ ] Scene tracker: active consequences on all tokens visible to GM
+- [x] Compendium: default resistance values for common obstacle types
+- [x] Scene tracker: active consequences on all tokens visible to GM
 
 ---
 
 ## Phase 7 — Experience & Advancement 🔜 PLANNED
 *Goal: Long-term character progression.*
 
-- [ ] XP award macro / button (GM awards XP to selected tokens)
-- [ ] Advance button on sheet:
-  - [ ] Raise existing ability +5 (costs 10 XP)
-  - [ ] New breakout at +5 under keyword (costs 10 XP)
-  - [ ] New standalone ability at 13 (costs 10 XP)
-  - [ ] New keyword at 13 (costs 10 XP)
+- [x] XP award macro / button (GM awards XP to selected tokens)
+- [x] Advance button on sheet:
+  - [x] Raise existing ability +5 (costs 10 XP)
+  - [x] New breakout at +5 under keyword (costs 10 XP)
+  - [x] New standalone ability at 13 (costs 10 XP)
+  - [x] New keyword at 13 (costs 10 XP)
 - [ ] Advancement history log (journal entry per advance)
 - [ ] System setting: configurable XP cost per advance
 
 **Polish**
 - [ ] Full localization pass — verify all strings in `en.json`
 - [ ] CSS polish — responsive layout, icon set, print stylesheet
-- [ ] System settings:
-  - [ ] Default resistance (GM configurable)
+- [x] System settings:
+  - [x] Default resistance (GM configurable)
   - [ ] Toggle: Wagered Sequences enabled
   - [ ] Toggle: Story Points enabled
-  - [ ] Toggle: Show resistance ladder reference panel
+  - [x] Toggle: Show resistance ladder reference panel
 
 ---
 
@@ -183,10 +187,11 @@
 
 - [ ] Sample pre-built characters (2–3 archetypes)
 - [ ] Blank character template Item compendium
-- [ ] Macro compendium:
-  - [ ] Quick Contest Launcher
-  - [ ] Resistance Roller (GM rolls random resistance from ladder)
-  - [ ] Award XP to selected tokens
+- [x] Macro compendium:
+  - [x] Quick Contest Launcher
+  - [x] Resistance Roller (GM rolls random resistance from ladder)
+  - [x] Award XP to selected tokens
+  - [x] Scene Tracker launcher (GM tool)
 - [ ] In-system Help journal (QuestWorlds rules summary, how to use this system)
 - [ ] README update for public release
 - [ ] Submit to Foundry package browser
