@@ -38,5 +38,6 @@
   },
   "packs": [],
   "packFolders": [],
-  "socket": false
+  "socket": false,
+  "download": "https://github.com/Corinos/questworlds-foundry/releases/download/v0.1.0/questworlds-foundry.zip"
 }
