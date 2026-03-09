@@ -1,0 +1,72 @@
+{{!--
+  Partial: keyword-block.hbs
+  Renders a single keyword ability and its breakout abilities.
+
+  Expected context:
+    keyword   — Item document (type "ability", system.abilityType === "keyword")
+    breakouts — array of Item documents where system.keywordId === keyword.id
+    owner     — boolean
+--}}
+<div class="keyword-block" data-item-id="{{keyword.id}}">
+
+  <div class="keyword-header flexrow">
+    <i class="fas fa-layer-group keyword-icon"></i>
+    <span class="keyword-name item-name">{{keyword.name}}</span>
+    <span class="keyword-rating ability-rating" title="{{localize 'QUESTWORLDS.Ability.Rating'}}">
+      {{qwRating keyword.system.rating}}
+    </span>
+    {{#if owner}}
+      <div class="item-controls">
+        <a class="item-control item-edit" data-item-id="{{keyword.id}}" title="{{localize 'QUESTWORLDS.Edit'}}">
+          <i class="fas fa-edit"></i>
+        </a>
+        <a class="item-control item-delete" data-item-id="{{keyword.id}}" title="{{localize 'QUESTWORLDS.Delete'}}">
+          <i class="fas fa-trash"></i>
+        </a>
+      </div>
+    {{/if}}
+  </div>
+
+  {{#if keyword.system.description}}
+    <p class="keyword-description ability-description">{{keyword.system.description}}</p>
+  {{/if}}
+
+  {{#if breakouts.length}}
+    <ul class="breakout-list">
+      {{#each breakouts as |breakout|}}
+        <li class="breakout-item flexrow" data-item-id="{{breakout.id}}">
+          <i class="fas fa-angle-right breakout-icon"></i>
+          <span class="breakout-name item-name">{{breakout.name}}</span>
+          <span class="breakout-rating ability-rating">
+            {{#if breakout.system.breakoutBonus}}
+              +{{breakout.system.breakoutBonus}}
+            {{else}}
+              {{qwRating breakout.system.rating}}
+            {{/if}}
+          </span>
+          {{#if owner}}
+            <div class="item-controls">
+              <a class="item-control item-edit" data-item-id="{{breakout.id}}" title="{{localize 'QUESTWORLDS.Edit'}}">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a class="item-control item-delete" data-item-id="{{breakout.id}}" title="{{localize 'QUESTWORLDS.Delete'}}">
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  {{#if owner}}
+    <a class="breakout-add item-create"
+       data-type="ability"
+       data-ability-type="breakout"
+       data-keyword-id="{{keyword.id}}"
+       title="{{localize 'QUESTWORLDS.Keyword.AddBreakout'}}">
+      <i class="fas fa-plus"></i> {{localize "QUESTWORLDS.Keyword.AddBreakout"}}
+    </a>
+  {{/if}}
+
+</div>

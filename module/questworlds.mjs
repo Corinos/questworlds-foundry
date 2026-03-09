@@ -25,10 +25,10 @@ import { SeedContentApp } from "./apps/seed-content-app.mjs";
 /* ------------------------------------------------------------------ */
 /*  Hooks: init                                                          */
 /* ------------------------------------------------------------------ */
-console.log("questworlds.mjs is loading!");
+
 
 Hooks.once("init", function () {
-  const major = Number(game.version?.split?.[0] ?? 0);
+  const major = Number(game.version?.split?.(".")?.[0] ?? 0);
   if (major && major !== 13) {
     ui.notifications.warn(
       `QuestWorlds is designed for Foundry V13; running on V${game.version}. Some features may not work as expected.`,
@@ -75,12 +75,29 @@ Hooks.once("init", function () {
     default: true,
   });
 
+  // V13 requires registerMenu type to be an ApplicationV2 subclass (FormApplication removed).
+  // If SeedContentApp already extends ApplicationV2 this wrapper is harmless; if it extends
+  // the old FormApplication we wrap it so the menu registration succeeds and clicking the
+  // button opens the app directly via game.questworlds.openSeedContent().
+  const _SeedMenuShim = class extends foundry.applications.api.ApplicationV2 {
+    static DEFAULT_OPTIONS = {
+      id: "questworlds-seed-content",
+      window: { title: "QUESTWORLDS.SeedMenu.Name" },
+    };
+    async _renderHTML() { return ""; }
+    async _replaceHTML() {
+      // Delegate immediately to the real app instead of rendering this shim.
+      this.close();
+      new SeedContentApp().render(true);
+    }
+  };
+
   game.settings.registerMenu("questworlds", "seedContent", {
     name: "QUESTWORLDS.SeedMenu.Name",
     label: "QUESTWORLDS.SeedMenu.Label",
     hint: "QUESTWORLDS.SeedMenu.Hint",
     icon: "fas fa-seedling",
-    type: SeedContentApp,
+    type: _SeedMenuShim,
     restricted: true,
   });
 
@@ -470,34 +487,36 @@ Hooks.once("ready", function () {
     html.find(".token-control").append(container);
   });
 
-  // Add QuestWorlds tools to the token controls for GMs.
+  // V13: controls and controls.token.tools are both objects keyed by name, not arrays.
   Hooks.on("getSceneControlButtons", (controls) => {
-    const tokenTools = controls.find((c) => c.name === "token");
+    const tokenTools = controls.token;
     if (!tokenTools) return;
 
-    tokenTools.tools.unshift(
-      {
-        name: "questworldsSeedContent",
-        title: game.i18n.localize("QUESTWORLDS.SeedMenu.Button"),
-        icon: "fas fa-seedling",
-        onClick: () => game.questworlds.openSeedContent(),
-        button: true,
-      },
-      {
-        name: "questworldsSceneTracker",
-        title: game.i18n.localize("QUESTWORLDS.SceneTracker.Button"),
-        icon: "fas fa-heartbeat",
-        onClick: () => game.questworlds.openSceneTracker(),
-        button: true,
-      },
-      {
-        name: "questworldsResistanceRoll",
-        title: game.i18n.localize("QUESTWORLDS.ResistanceRoll.Button"),
-        icon: "fas fa-dice",
-        onClick: () => game.questworlds.rollResistance(),
-        button: true,
-      },
-    );
+    // In V13 tools is a plain object; assign each tool by its name key.
+    tokenTools.tools.questworldsSeedContent = {
+      name: "questworldsSeedContent",
+      title: game.i18n.localize("QUESTWORLDS.SeedMenu.Button"),
+      icon: "fas fa-seedling",
+      onChange: () => game.questworlds.openSeedContent(),
+      button: true,
+      order: 1,
+    };
+    tokenTools.tools.questworldsSceneTracker = {
+      name: "questworldsSceneTracker",
+      title: game.i18n.localize("QUESTWORLDS.SceneTracker.Button"),
+      icon: "fas fa-heartbeat",
+      onChange: () => game.questworlds.openSceneTracker(),
+      button: true,
+      order: 2,
+    };
+    tokenTools.tools.questworldsResistanceRoll = {
+      name: "questworldsResistanceRoll",
+      title: game.i18n.localize("QUESTWORLDS.ResistanceRoll.Button"),
+      icon: "fas fa-dice",
+      onChange: () => game.questworlds.rollResistance(),
+      button: true,
+      order: 3,
+    };
   });
 
   // Allow spending a Story Point from the chat card to reroll a contest.

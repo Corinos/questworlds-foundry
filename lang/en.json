@@ -78,11 +78,13 @@
 
     "PenaltyTotal": "Penalty Total",
     "BonusTotal": "Bonus Total",
-    "NextContestEffects": "Next-contest effects",
-    "NextContestEffects.ClearTitle": "Clear next-contest effects",
-    "NextContestEffects.ClearPrompt": "Are you sure you want to remove all temporary effects that expire after the next contest?",
-    "NextContestEffects.ClearConfirm": "Clear",
-    "NextContestEffects.ClearCancel": "Cancel",
+    "NextContestEffects": {
+      "Title": "Next-contest effects",
+      "ClearTitle": "Clear next-contest effects",
+      "ClearPrompt": "Are you sure you want to remove all temporary effects that expire after the next contest?",
+      "ClearConfirm": "Clear",
+      "ClearCancel": "Cancel"
+    },
     "ResolutionPoints": "Resolution Points",
     "IncreaseResolution": "Increase",
     "DecreaseResolution": "Decrease",
