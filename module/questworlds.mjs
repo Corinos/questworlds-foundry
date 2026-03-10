@@ -305,7 +305,7 @@ Hooks.once("init", function () {
   CONFIG.Item.documentClass  = QWItem;
 
   // ---- Actor / Item Sheet Classes ---------------------------------
-  Actors.unregisterSheet("core", ActorSheet);
+  // ---- Actor / Item Sheet Classes (ApplicationV2) -----------------
   Actors.registerSheet("questworlds", QWCharacterSheet, {
     types: ["character"],
     makeDefault: true,
@@ -317,7 +317,6 @@ Hooks.once("init", function () {
     label: "QUESTWORLDS.SheetNpc",
   });
 
-  Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("questworlds", QWAbilitySheet, {
     types: ["ability", "flaw", "benefit", "consequence"],
     makeDefault: true,

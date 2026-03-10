@@ -30,6 +30,7 @@
           {{#each (qwRange system.storyPoints.max) as |pip|}}
             <span
               class="sp-pip {{#if (qwEq pip ../system.storyPoints.value)}}active{{/if}}"
+              data-action="storyPointClick"
               data-value="{{pip}}"
             >◆</span>
           {{/each}}
@@ -41,10 +42,10 @@
       <div class="xp-tracker flexrow">
         <label class="xp-label">{{localize "QUESTWORLDS.Experience"}}</label>
         <div class="xp-controls">
-          <button type="button" class="xp-decrement" title="{{localize "QUESTWORLDS.DecreaseExperience"}}">−</button>
+          <button type="button" data-action="xpDecrement" title="{{localize "QUESTWORLDS.DecreaseExperience"}}">−</button>
           <span class="xp-value">{{system.experience.value}}</span>
-          <button type="button" class="xp-increment" title="{{localize "QUESTWORLDS.IncreaseExperience"}}">+</button>
-          <button type="button" class="xp-advance" title="{{localize "QUESTWORLDS.Advancement.Heading"}}">⇧</button>
+          <button type="button" data-action="xpIncrement" title="{{localize "QUESTWORLDS.IncreaseExperience"}}">+</button>
+          <button type="button" data-action="xpAdvance" title="{{localize "QUESTWORLDS.Advancement.Heading"}}">⇧</button>
         </div>
         <span class="xp-advances">{{localize "QUESTWORLDS.Advances"}}: {{system.experience.advances}}</span>
       </div>
@@ -53,9 +54,9 @@
       <div class="rp-tracker flexrow">
         <label class="rp-label">{{localize "QUESTWORLDS.ResolutionPoints"}}</label>
         <div class="rp-controls">
-          <button type="button" class="rp-decrement" title="{{localize "QUESTWORLDS.DecreaseResolution"}}">−</button>
+          <button type="button" data-action="rpDecrement" title="{{localize "QUESTWORLDS.DecreaseResolution"}}">−</button>
           <span class="rp-value">{{system.resolutionPoints.value}}</span>
-          <button type="button" class="rp-increment" title="{{localize "QUESTWORLDS.IncreaseResolution"}}">+</button>
+          <button type="button" data-action="rpIncrement" title="{{localize "QUESTWORLDS.IncreaseResolution"}}">+</button>
         </div>
         <span class="rp-max">/ {{system.resolutionPoints.max}}</span>
       </div>
@@ -70,9 +71,9 @@
       {{#if nextContestEffects.length}}
         <div class="next-contest-effects">
           <div class="next-contest-effects__header">
-            <strong>{{localize "QUESTWORLDS.NextContestEffects"}}</strong>
+            <strong>{{localize "QUESTWORLDS.NextContestEffects.Title"}}</strong>
             {{#if (or isOwner isGM)}}
-              <button type="button" class="next-contest-clear" title="{{localize "QUESTWORLDS.NextContestEffects.Clear"}}">
+              <button type="button" data-action="clearNextContestEffects" title="{{localize "QUESTWORLDS.NextContestEffects.ClearTitle"}}">
                 <i class="fas fa-trash"></i>
               </button>
             {{/if}}
@@ -93,19 +94,19 @@
 
   {{!-- ==================== TABS ==================== --}}
   <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item active" data-tab="abilities">{{localize "QUESTWORLDS.TabAbilities"}}</a>
-    <a class="item" data-tab="flaws">{{localize "QUESTWORLDS.TabFlaws"}}</a>
-    <a class="item" data-tab="effects">{{localize "QUESTWORLDS.TabEffects"}}</a>
-    <a class="item" data-tab="notes">{{localize "QUESTWORLDS.TabNotes"}}</a>
+    <a class="item {{#if (eq tabs.abilities.id tabGroups.primary)}}active{{/if}}" data-tab="abilities" data-group="primary">{{localize "QUESTWORLDS.TabAbilities"}}</a>
+    <a class="item {{#if (eq tabs.flaws.id tabGroups.primary)}}active{{/if}}" data-tab="flaws" data-group="primary">{{localize "QUESTWORLDS.TabFlaws"}}</a>
+    <a class="item {{#if (eq tabs.effects.id tabGroups.primary)}}active{{/if}}" data-tab="effects" data-group="primary">{{localize "QUESTWORLDS.TabEffects"}}</a>
+    <a class="item {{#if (eq tabs.notes.id tabGroups.primary)}}active{{/if}}" data-tab="notes" data-group="primary">{{localize "QUESTWORLDS.TabNotes"}}</a>
   </nav>
 
   <section class="sheet-body">
 
     {{!-- ==================== ABILITIES ==================== --}}
-    <div class="tab abilities active" data-group="primary" data-tab="abilities">
+    <div class="tab abilities {{tabs.abilities.cssClass}}" data-group="primary" data-tab="abilities">
       <div class="abilities-toolbar flexrow">
         <h3>{{localize "QUESTWORLDS.Abilities"}}</h3>
-        <a class="item-create" data-type="ability" title="{{localize 'QUESTWORLDS.AddAbility'}}">
+        <a data-action="itemCreate" data-type="ability" title="{{localize 'QUESTWORLDS.AddAbility'}}">
           <i class="fas fa-plus"></i>
         </a>
       </div>
@@ -119,21 +120,19 @@
                 <span class="ability-icon"><i class="fas fa-key"></i></span>
                 <span class="ability-name">
                   <input class="inline-name" data-item-id="{{group.item.id}}" data-field="name" value="{{group.item.name}}" />
-                  <a class="ability-roll" data-item-id="{{group.item.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
+                  <a data-action="abilityRoll" data-item-id="{{group.item.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
                 </span>
                 <input
                   class="inline-rating"
                   type="number"
-                  min="1"
-                  max="100"
-                  step="1"
+                  min="1" max="100" step="1"
                   data-item-id="{{group.item.id}}"
                   data-field="system.rating"
                   value="{{group.item.system.rating}}"
                 />
                 <div class="item-controls flexrow">
-                  <a class="item-edit" data-item-id="{{group.item.id}}" title="Edit"><i class="fas fa-edit"></i></a>
-                  <a class="item-delete" data-item-id="{{group.item.id}}" title="Delete"><i class="fas fa-trash"></i></a>
+                  <a data-action="itemEdit" data-item-id="{{group.item.id}}" title="{{localize "QUESTWORLDS.Edit"}}"><i class="fas fa-edit"></i></a>
+                  <a data-action="itemDelete" data-item-id="{{group.item.id}}" title="{{localize "QUESTWORLDS.Delete"}}"><i class="fas fa-trash"></i></a>
                 </div>
               </div>
 
@@ -145,22 +144,19 @@
                       <span class="ability-icon"><i class="fas fa-code-branch"></i></span>
                       <span class="ability-name breakout-name">
                         ↳ <input class="inline-name" data-item-id="{{breakout.id}}" data-field="name" value="{{breakout.name}}" />
-                        <a class="ability-roll" data-item-id="{{breakout.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
+                        <a data-action="abilityRoll" data-item-id="{{breakout.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
                       </span>
-                      {{!-- effectiveRating is supplied by getData() via actor.getEffectiveRating() --}}
                       <input
                         class="inline-rating"
                         type="number"
-                        min="1"
-                        max="100"
-                        step="1"
+                        min="1" max="100" step="1"
                         data-item-id="{{breakout.id}}"
                         data-field="effectiveRating"
                         value="{{breakout.effectiveRating}}"
                       />
                       <div class="item-controls flexrow">
-                        <a class="item-edit" data-item-id="{{breakout.id}}" title="Edit"><i class="fas fa-edit"></i></a>
-                        <a class="item-delete" data-item-id="{{breakout.id}}" title="Delete"><i class="fas fa-trash"></i></a>
+                        <a data-action="itemEdit" data-item-id="{{breakout.id}}" title="{{localize "QUESTWORLDS.Edit"}}"><i class="fas fa-edit"></i></a>
+                        <a data-action="itemDelete" data-item-id="{{breakout.id}}" title="{{localize "QUESTWORLDS.Delete"}}"><i class="fas fa-trash"></i></a>
                       </div>
                     </div>
                   {{/each}}
@@ -173,7 +169,7 @@
               </div>
 
               <div class="breakout-add">
-                <a class="item-create" data-type="ability" data-ability-type="breakout" data-keyword-id="{{group.item.id}}">
+                <a data-action="itemCreate" data-type="ability" data-ability-type="breakout" data-keyword-id="{{group.item.id}}">
                   <i class="fas fa-plus"></i> {{localize "QUESTWORLDS.AddBreakout"}}
                 </a>
               </div>
@@ -195,21 +191,19 @@
               <span class="ability-icon"><i class="fas fa-shield-alt"></i></span>
               <span class="ability-name">
                 <input class="inline-name" data-item-id="{{ability.id}}" data-field="name" value="{{ability.name}}" />
-                <a class="ability-roll" data-item-id="{{ability.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
+                <a data-action="abilityRoll" data-item-id="{{ability.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
               </span>
               <input
                 class="inline-rating"
                 type="number"
-                min="1"
-                max="100"
-                step="1"
+                min="1" max="100" step="1"
                 data-item-id="{{ability.id}}"
                 data-field="system.rating"
                 value="{{ability.system.rating}}"
               />
               <div class="item-controls flexrow">
-                <a class="item-edit" data-item-id="{{ability.id}}" title="Edit"><i class="fas fa-edit"></i></a>
-                <a class="item-delete" data-item-id="{{ability.id}}" title="Delete"><i class="fas fa-trash"></i></a>
+                <a data-action="itemEdit" data-item-id="{{ability.id}}" title="{{localize "QUESTWORLDS.Edit"}}"><i class="fas fa-edit"></i></a>
+                <a data-action="itemDelete" data-item-id="{{ability.id}}" title="{{localize "QUESTWORLDS.Delete"}}"><i class="fas fa-trash"></i></a>
               </div>
             </div>
           {{/each}}
@@ -220,17 +214,13 @@
           </div>
         {{/if}}
       </div>
-
-      {{#unless grouped.keywords}}{{#unless grouped.standalone}}
-        <p class="no-abilities">{{localize "QUESTWORLDS.NoAbilities"}}</p>
-      {{/unless}}{{/unless}}
     </div>
 
     {{!-- ==================== FLAWS ==================== --}}
-    <div class="tab flaws" data-group="primary" data-tab="flaws">
+    <div class="tab flaws {{tabs.flaws.cssClass}}" data-group="primary" data-tab="flaws">
       <div class="abilities-toolbar flexrow">
         <h3>{{localize "QUESTWORLDS.Flaws"}}</h3>
-        <a class="item-create" data-type="flaw">
+        <a data-action="itemCreate" data-type="flaw">
           <i class="fas fa-plus"></i>
         </a>
       </div>
@@ -241,8 +231,8 @@
             <span class="ability-name">{{flaw.name}}</span>
             <span class="ability-rating flaw-rating">{{qwRating flaw.system.rating}}</span>
             <div class="item-controls flexrow">
-              <a class="item-edit" data-item-id="{{flaw.id}}"><i class="fas fa-edit"></i></a>
-              <a class="item-delete" data-item-id="{{flaw.id}}"><i class="fas fa-trash"></i></a>
+              <a data-action="itemEdit" data-item-id="{{flaw.id}}"><i class="fas fa-edit"></i></a>
+              <a data-action="itemDelete" data-item-id="{{flaw.id}}"><i class="fas fa-trash"></i></a>
             </div>
           </div>
         {{/each}}
@@ -254,12 +244,12 @@
       {{/if}}
     </div>
 
-    {{!-- ==================== EFFECTS (Consequences & Benefits) ==================== --}}
-    <div class="tab effects" data-group="primary" data-tab="effects">
+    {{!-- ==================== EFFECTS ==================== --}}
+    <div class="tab effects {{tabs.effects.cssClass}}" data-group="primary" data-tab="effects">
       <div class="effects-section">
         <div class="abilities-toolbar flexrow">
           <h3>{{localize "QUESTWORLDS.Consequences"}}</h3>
-          <a class="item-create" data-type="consequence"><i class="fas fa-plus"></i></a>
+          <a data-action="itemCreate" data-type="consequence"><i class="fas fa-plus"></i></a>
         </div>
         {{#if consequences.length}}
           {{#each consequences as |item|}}
@@ -269,8 +259,8 @@
               <span class="effect-severity">{{qwSeverityLabel item.system.severity}}</span>
               <span class="effect-penalty">{{qwPenalty item.system.severity}}</span>
               <div class="item-controls flexrow">
-                <a class="item-edit" data-item-id="{{item.id}}"><i class="fas fa-edit"></i></a>
-                <a class="item-delete" data-item-id="{{item.id}}"><i class="fas fa-trash"></i></a>
+                <a data-action="itemEdit" data-item-id="{{item.id}}"><i class="fas fa-edit"></i></a>
+                <a data-action="itemDelete" data-item-id="{{item.id}}"><i class="fas fa-trash"></i></a>
               </div>
             </div>
           {{/each}}
@@ -285,7 +275,7 @@
       <div class="effects-section">
         <div class="abilities-toolbar flexrow">
           <h3>{{localize "QUESTWORLDS.Benefits"}}</h3>
-          <a class="item-create" data-type="benefit"><i class="fas fa-plus"></i></a>
+          <a data-action="itemCreate" data-type="benefit"><i class="fas fa-plus"></i></a>
         </div>
         {{#if benefits.length}}
           {{#each benefits as |item|}}
@@ -294,8 +284,8 @@
               <span class="effect-name">{{item.name}}</span>
               <span class="effect-bonus">+{{item.system.bonus}}</span>
               <div class="item-controls flexrow">
-                <a class="item-edit" data-item-id="{{item.id}}"><i class="fas fa-edit"></i></a>
-                <a class="item-delete" data-item-id="{{item.id}}"><i class="fas fa-trash"></i></a>
+                <a data-action="itemEdit" data-item-id="{{item.id}}"><i class="fas fa-edit"></i></a>
+                <a data-action="itemDelete" data-item-id="{{item.id}}"><i class="fas fa-trash"></i></a>
               </div>
             </div>
           {{/each}}
@@ -309,7 +299,7 @@
     </div>
 
     {{!-- ==================== NOTES ==================== --}}
-    <div class="tab notes" data-group="primary" data-tab="notes">
+    <div class="tab notes {{tabs.notes.cssClass}}" data-group="primary" data-tab="notes">
       <div class="editor">
         {{editor system.notes target="system.notes" button=true editable=isOwner}}
       </div>

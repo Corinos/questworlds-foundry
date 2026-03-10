@@ -1,24 +1,15 @@
 {{!--
   Partial: benefit-list.hbs
-  Renders the list of active benefit items on an actor.
-
-  Benefit types (QWBenefitData.benefitType choices):
-    fresh-hero | victory | augment | story | other
-
-  Expected context:
-    benefits — array of Item documents of type "benefit"
-    owner    — boolean
+  Expected context: benefits, owner, actor
 --}}
 <section class="benefits-section">
   <div class="section-header flexrow">
     <h3 class="section-title">
       <i class="fas fa-star"></i>
-      {{localize "QUESTWORLDS.Benefits.Title"}}
+      {{localize "QUESTWORLDS.Benefits"}}
     </h3>
     {{#if owner}}
-      <a class="item-create benefit-add"
-         data-type="benefit"
-         title="{{localize 'QUESTWORLDS.Benefits.Add'}}">
+      <a data-action="itemCreate" data-type="benefit" title="Add Benefit">
         <i class="fas fa-plus"></i>
       </a>
     {{/if}}
@@ -30,9 +21,7 @@
         <li class="benefit-item item flexrow benefit-type-{{ben.system.benefitType}}"
             data-item-id="{{ben.id}}">
 
-          {{!-- Type icon --}}
-          <span class="benefit-type-icon"
-                title="{{localize (concat 'QUESTWORLDS.Benefit.Type.' ben.system.benefitType)}}">
+          <span class="benefit-type-icon">
             {{#if (eq ben.system.benefitType "fresh-hero")}}<i class="fas fa-shield-alt"></i>{{/if}}
             {{#if (eq ben.system.benefitType "victory")}}<i class="fas fa-trophy"></i>{{/if}}
             {{#if (eq ben.system.benefitType "augment")}}<i class="fas fa-arrow-up"></i>{{/if}}
@@ -40,33 +29,24 @@
             {{#if (eq ben.system.benefitType "other")}}<i class="fas fa-star"></i>{{/if}}
           </span>
 
-          {{!-- Name --}}
           <span class="benefit-name item-name">{{ben.name}}</span>
 
-          {{!-- Bonus badge --}}
-          <span class="benefit-bonus tag tag--bonus"
-                title="{{localize 'QUESTWORLDS.Benefit.Bonus'}}">
+          <span class="benefit-bonus tag tag--bonus" title="{{localize 'QUESTWORLDS.Bonus'}}">
             +{{ben.system.bonus}}
           </span>
 
-          {{!-- Expiry trigger --}}
           {{#if ben.system.expiresOn}}
-            <span class="benefit-expires"
-                  title="{{localize 'QUESTWORLDS.Benefit.ExpiresOn'}}">
+            <span class="benefit-expires" title="{{localize 'QUESTWORLDS.ExpiresOn'}}">
               <i class="fas fa-hourglass-half"></i> {{ben.system.expiresOn}}
             </span>
           {{/if}}
 
           {{#if owner}}
             <div class="item-controls">
-              <a class="item-control item-edit"
-                 data-item-id="{{ben.id}}"
-                 title="{{localize 'QUESTWORLDS.Edit'}}">
+              <a data-action="itemEdit" data-item-id="{{ben.id}}" title="{{localize 'QUESTWORLDS.Edit'}}">
                 <i class="fas fa-edit"></i>
               </a>
-              <a class="item-control item-delete"
-                 data-item-id="{{ben.id}}"
-                 title="{{localize 'QUESTWORLDS.Delete'}}">
+              <a data-action="itemDelete" data-item-id="{{ben.id}}" title="{{localize 'QUESTWORLDS.Delete'}}">
                 <i class="fas fa-trash"></i>
               </a>
             </div>
@@ -75,13 +55,12 @@
       {{/each}}
     </ul>
 
-    {{!-- Running bonus total (from actor.system.bonusTotal) --}}
     <div class="benefit-total flexrow">
-      <span class="benefit-total-label">{{localize "QUESTWORLDS.Benefits.TotalBonus"}}</span>
+      <span class="benefit-total-label">{{localize "QUESTWORLDS.BonusTotal"}}</span>
       <span class="benefit-total-value tag tag--bonus">+{{actor.system.bonusTotal}}</span>
     </div>
 
   {{else}}
-    <p class="empty-list">{{localize "QUESTWORLDS.Benefits.None"}}</p>
+    <p class="empty-list">{{localize "QUESTWORLDS.EmptyBenefits"}}</p>
   {{/if}}
 </section>

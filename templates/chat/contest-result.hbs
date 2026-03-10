@@ -2,29 +2,39 @@
   <h2>{{localize "QUESTWORLDS.ContestResult.Title"}} — {{abilityName}}</h2>
   <div class="contest-summary">
     <div class="contest-side">
-      <h3>{{localize "QUESTWORLDS.HeroDie"}}</h3>
+      <h3>{{localize "QUESTWORLDS.Roll.HeroDie"}}</h3>
       <div><strong>{{heroRoll}}</strong> / {{heroTarget}} ({{heroLevelLabel}})</div>
-      <div class="contest-masteries">{{localize "QUESTWORLDS.Mastery"}} {{heroMasteries}}</div>
+      <div class="contest-masteries">{{localize "QUESTWORLDS.Roll.Mastery"}} {{heroMasteries}}</div>
     </div>
     <div class="contest-side">
-      <h3>{{localize "QUESTWORLDS.Resistance"}}</h3>
+      <h3>{{localize "QUESTWORLDS.Roll.Resistance"}}</h3>
       <div><strong>{{oppRoll}}</strong> / {{oppTarget}} ({{oppLevelLabel}})</div>
-      <div class="contest-masteries">{{localize "QUESTWORLDS.Mastery"}} {{oppositionMasteries}}</div>
+      <div class="contest-masteries">{{localize "QUESTWORLDS.Roll.Mastery"}} {{oppositionMasteries}}</div>
     </div>
   </div>
+
   <div class="contest-outcome">
     <strong>{{localize "QUESTWORLDS.ContestResult.Outcome"}}:</strong> {{outcome}}
   </div>
-  {{#if autoSuccess}}
-    <div class="contest-narration">
-      <em>{{localize "QUESTWORLDS.ContestResult.AutoSuccess"}}</em>
-    </div>
-  {{/if}}
+
   {{#if narration}}
     <div class="contest-narration">
       <em>{{narration}}</em>
     </div>
   {{/if}}
+
+  {{#if autoSuccess}}
+    <div class="contest-autosuccess">
+      <em>{{localize "QUESTWORLDS.ContestResult.AutoSuccessNote"}}</em>
+    </div>
+  {{/if}}
+
+  {{#if spentStoryPoint}}
+    <div class="contest-storypoint">
+      <em>{{localize "QUESTWORLDS.ContestResult.SpentStoryPoint"}} ({{remainingStoryPoints}} {{localize "QUESTWORLDS.StoryPoints"}})</em>
+    </div>
+  {{/if}}
+
   {{#if canReroll}}
     <div class="contest-actions">
       <a
@@ -38,16 +48,7 @@
       </a>
     </div>
   {{/if}}
-  {{#if spentStoryPoint}}
-    <div class="contest-storypoint">
-      <em>{{localize "QUESTWORLDS.ContestResult.SpentStoryPoint"}} ({{remainingStoryPoints}} {{localize "QUESTWORLDS.StoryPoints"}})</em>
-    </div>
-  {{/if}}
-  {{#if autoSuccess}}
-    <div class="contest-autosuccess">
-      <em>{{localize "QUESTWORLDS.ContestResult.AutoSuccessNote"}}</em>
-    </div>
-  {{/if}}
+
   {{#if canApplyRp}}
     <div class="contest-actions">
       <a

@@ -1,26 +1,19 @@
 {{!--
   Partial: keyword-block.hbs
-  Renders a single keyword ability and its breakout abilities.
-
-  Expected context:
-    keyword   — Item document (type "ability", system.abilityType === "keyword")
-    breakouts — array of Item documents where system.keywordId === keyword.id
-    owner     — boolean
+  Expected context: keyword, breakouts, owner
 --}}
 <div class="keyword-block" data-item-id="{{keyword.id}}">
 
   <div class="keyword-header flexrow">
     <i class="fas fa-layer-group keyword-icon"></i>
     <span class="keyword-name item-name">{{keyword.name}}</span>
-    <span class="keyword-rating ability-rating" title="{{localize 'QUESTWORLDS.Ability.Rating'}}">
-      {{qwRating keyword.system.rating}}
-    </span>
+    <span class="keyword-rating ability-rating">{{qwRating keyword.system.rating}}</span>
     {{#if owner}}
       <div class="item-controls">
-        <a class="item-control item-edit" data-item-id="{{keyword.id}}" title="{{localize 'QUESTWORLDS.Edit'}}">
+        <a data-action="itemEdit" data-item-id="{{keyword.id}}" title="{{localize 'QUESTWORLDS.Edit'}}">
           <i class="fas fa-edit"></i>
         </a>
-        <a class="item-control item-delete" data-item-id="{{keyword.id}}" title="{{localize 'QUESTWORLDS.Delete'}}">
+        <a data-action="itemDelete" data-item-id="{{keyword.id}}" title="{{localize 'QUESTWORLDS.Delete'}}">
           <i class="fas fa-trash"></i>
         </a>
       </div>
@@ -46,10 +39,10 @@
           </span>
           {{#if owner}}
             <div class="item-controls">
-              <a class="item-control item-edit" data-item-id="{{breakout.id}}" title="{{localize 'QUESTWORLDS.Edit'}}">
+              <a data-action="itemEdit" data-item-id="{{breakout.id}}" title="{{localize 'QUESTWORLDS.Edit'}}">
                 <i class="fas fa-edit"></i>
               </a>
-              <a class="item-control item-delete" data-item-id="{{breakout.id}}" title="{{localize 'QUESTWORLDS.Delete'}}">
+              <a data-action="itemDelete" data-item-id="{{breakout.id}}" title="{{localize 'QUESTWORLDS.Delete'}}">
                 <i class="fas fa-trash"></i>
               </a>
             </div>
@@ -60,12 +53,12 @@
   {{/if}}
 
   {{#if owner}}
-    <a class="breakout-add item-create"
+    <a data-action="itemCreate"
        data-type="ability"
        data-ability-type="breakout"
        data-keyword-id="{{keyword.id}}"
-       title="{{localize 'QUESTWORLDS.Keyword.AddBreakout'}}">
-      <i class="fas fa-plus"></i> {{localize "QUESTWORLDS.Keyword.AddBreakout"}}
+       title="{{localize 'QUESTWORLDS.AddBreakout'}}">
+      <i class="fas fa-plus"></i> {{localize "QUESTWORLDS.AddBreakout"}}
     </a>
   {{/if}}
 

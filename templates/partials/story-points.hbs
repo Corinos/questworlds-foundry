@@ -1,75 +1,27 @@
 {{!--
   Partial: story-points.hbs
-  Renders the Story Points tracker for a PC.
-
-  Story Points are a per-session meta-currency (QuestWorlds SRD §8).
-  Spending one lets the player reroll a contest.
-
-  Expected context (all available in a standard actor sheet getData()):
-    actor              — the Actor document
-    system.storyPoints — SchemaField { value: Number, max: Number }
-    owner              — boolean
-    isGM               — boolean (game.user.isGM, pass from sheet)
+  Expected context: system.storyPoints, owner, isGM
 --}}
-<div class="story-points-tracker">
-  <div class="story-points-header flexrow">
-    <h3 class="section-title">
-      <i class="fas fa-coins"></i>
-      {{localize "QUESTWORLDS.StoryPoints.Title"}}
-    </h3>
-    <span class="story-points-hint">{{localize "QUESTWORLDS.StoryPoints.Hint"}}</span>
+<div class="story-points flexrow">
+  <label class="sp-label">{{localize "QUESTWORLDS.StoryPoints"}}</label>
+  <div class="sp-pips">
+    {{#each (qwRange system.storyPoints.max) as |pip|}}
+      <span
+        class="sp-pip {{#if (qwEq pip ../system.storyPoints.value)}}active{{/if}}"
+        data-action="storyPointClick"
+        data-value="{{pip}}"
+      >◆</span>
+    {{/each}}
   </div>
-
-  <div class="story-points-body flexrow">
-
-    {{!-- Pip track: one pip per max story point --}}
-    <div class="story-points-pips" aria-label="{{localize 'QUESTWORLDS.StoryPoints.Title'}}">
-      {{#times system.storyPoints.max}}
-        {{!--
-          Handlebars @index is 0-based; compare against value to light pip.
-          The `lte` helper must be registered in handlebars.mjs:
-            Handlebars.registerHelper('lte', (a, b) => a <= b);
-        --}}
-        <span class="story-point-pip {{#if (lte @index (sub system.storyPoints.value 1))}}story-point-pip--filled{{/if}}"
-              data-index="{{@index}}">
-          <i class="fas fa-circle"></i>
-        </span>
-      {{/times}}
-    </div>
-
-    {{!-- Numeric display --}}
-    <span class="story-points-count">
-      {{system.storyPoints.value}} / {{system.storyPoints.max}}
-    </span>
-
-    {{!-- Spend / gain controls --}}
-    {{#if owner}}
-      <div class="story-points-controls">
-        <a class="story-point-control story-point-spend"
-           title="{{localize 'QUESTWORLDS.StoryPoints.Spend'}}"
-           {{#unless system.storyPoints.value}}disabled{{/unless}}>
-          <i class="fas fa-minus"></i>
-        </a>
-        <a class="story-point-control story-point-gain"
-           title="{{localize 'QUESTWORLDS.StoryPoints.Gain'}}"
-           {{#if (gte system.storyPoints.value system.storyPoints.max)}}disabled{{/if}}>
-          <i class="fas fa-plus"></i>
-        </a>
-      </div>
-    {{/if}}
-
-    {{!-- GM can also edit max --}}
-    {{#if isGM}}
-      <div class="story-points-max-edit">
-        <label class="story-points-max-label">{{localize "QUESTWORLDS.StoryPoints.Max"}}</label>
-        <input class="story-points-max-input"
-               type="number"
-               name="system.storyPoints.max"
-               value="{{system.storyPoints.max}}"
-               min="0"
-               data-dtype="Number" />
-      </div>
-    {{/if}}
-
-  </div>
+  <span class="sp-count">{{system.storyPoints.value}} / {{system.storyPoints.max}}</span>
+  {{#if isGM}}
+    <input
+      class="sp-max-input"
+      type="number"
+      name="system.storyPoints.max"
+      value="{{system.storyPoints.max}}"
+      min="0"
+      title="Max Story Points"
+    />
+  {{/if}}
 </div>

@@ -1,25 +1,29 @@
 /**
- * QuestWorlds — Ability / Item Sheet (stub for Phase 3)
+ * QuestWorlds — Ability / Item Sheet (ApplicationV2)
  */
-export class QWAbilitySheet extends ItemSheet {
 
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["questworlds", "sheet", "item"],
+const { ItemSheetV2 } = foundry.applications.sheets;
+const { HandlebarsApplicationMixin } = foundry.applications.api;
+
+export class QWAbilitySheet extends HandlebarsApplicationMixin(ItemSheetV2) {
+
+  static DEFAULT_OPTIONS = {
+    classes: ["questworlds", "sheet", "item"],
+    position: { width: 480, height: 360 },
+    window: { resizable: true },
+    form: { submitOnChange: true, closeOnSubmit: false },
+  };
+
+  static PARTS = {
+    sheet: {
       template: "systems/questworlds/templates/items/ability-sheet.hbs",
-      width: 480,
-      height: 360,
-    });
-  }
+    },
+  };
 
-  getData() {
-    const context  = super.getData();
+  async _prepareContext(options) {
+    const context  = await super._prepareContext(options);
     context.system = this.item.system;
     context.config = CONFIG.QUESTWORLDS ?? {};
     return context;
-  }
-
-  activateListeners(html) {
-    super.activateListeners(html);
   }
 }

@@ -1,6 +1,22 @@
+{{!--
+  Partial: ability-list.hbs
+  Expected context: abilities, owner
+--}}
 {{#each abilities as |ability|}}
-  <li class="ability-item" data-item-id="{{ability.id}}">
+  <div class="ability-row standalone flexrow" data-item-id="{{ability.id}}">
+    <span class="ability-icon"><i class="fas fa-shield-alt"></i></span>
     <span class="ability-name">{{ability.name}}</span>
-    <span class="ability-rating">{{ability.system.rating}}</span>
-  </li>
+    <span class="ability-rating">{{qwRating ability.system.rating}}</span>
+    {{#if owner}}
+      <div class="item-controls flexrow">
+        <a data-action="itemEdit" data-item-id="{{ability.id}}" title="{{localize 'QUESTWORLDS.Edit'}}"><i class="fas fa-edit"></i></a>
+        <a data-action="itemDelete" data-item-id="{{ability.id}}" title="{{localize 'QUESTWORLDS.Delete'}}"><i class="fas fa-trash"></i></a>
+      </div>
+    {{/if}}
+  </div>
+{{else}}
+  <div class="empty-state">
+    <i class="fas fa-seedling"></i>
+    <span>{{localize "QUESTWORLDS.NoAbilities"}}</span>
+  </div>
 {{/each}}

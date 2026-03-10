@@ -12,7 +12,12 @@
                 <div class="qw-scene-token-actor">{{token.actorName}}</div>
               </div>
               {{#if token.consequences.length}}
-                <button type="button" class="questworlds-clear-consequences" data-token-id="{{token.id}}" title="{{localize "QUESTWORLDS.SceneTracker.ClearButton"}}">
+                <button
+                  type="button"
+                  data-action="clearConsequences"
+                  data-token-id="{{token.id}}"
+                  title="{{localize "QUESTWORLDS.SceneTracker.ClearButton"}}"
+                >
                   <i class="fas fa-trash"></i>
                 </button>
               {{/if}}
@@ -22,14 +27,21 @@
               <ul class="qw-consequence-list">
                 {{#each token.consequences as |con|}}
                   <li class="qw-consequence">
-                    <strong>{{con.name}}</strong> <span class="qw-consequence-severity">({{qwSeverityLabel con.severity}})</span>
+                    <strong>{{con.name}}</strong>
+                    <span class="qw-consequence-severity">({{qwSeverityLabel con.severity}})</span>
                     <div class="qw-consequence-desc">{{con.description}}</div>
-                    {{#if con.source}}<div class="qw-consequence-source">{{localize "QUESTWORLDS.SceneTracker.Source"}}: {{con.source}}</div>{{/if}}
+                    {{#if con.source}}
+                      <div class="qw-consequence-source">
+                        {{localize "QUESTWORLDS.SceneTracker.Source"}}: {{con.source}}
+                      </div>
+                    {{/if}}
                   </li>
                 {{/each}}
               </ul>
             {{else}}
-              <div class="qw-consequence-empty">{{localize "QUESTWORLDS.SceneTracker.NoConsequencesForToken"}}</div>
+              <div class="qw-consequence-empty">
+                {{localize "QUESTWORLDS.SceneTracker.NoConsequencesForToken"}}
+              </div>
             {{/if}}
           </li>
         {{/each}}
