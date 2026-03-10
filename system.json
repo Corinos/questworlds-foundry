@@ -39,5 +39,6 @@
   "packs": [],
   "packFolders": [],
   "socket": false,
+  "manifest": "https://raw.githubusercontent.com/Corinos/questworlds-foundry/main/system.json",
   "download": "https://github.com/Corinos/questworlds-foundry/archive/refs/tags/0.2.0.zip"
 }
