@@ -1,59 +1,48 @@
 {
   "QUESTWORLDS": {
-
     "SheetCharacter": "QuestWorlds Character Sheet",
-    "SheetNpc":       "QuestWorlds NPC Sheet",
-    "SheetAbility":   "QuestWorlds Ability Sheet",
-
+    "SheetNpc": "QuestWorlds NPC Sheet",
+    "SheetAbility": "QuestWorlds Ability Sheet",
     "TabAbilities": "Abilities",
-    "TabFlaws":     "Flaws",
-    "TabEffects":   "Effects",
-    "TabNotes":     "Notes",
-
-    "Abilities":  "Abilities",
-    "Flaws":      "Flaws",
-    "Keywords":   "Keywords",
-    "Breakouts":  "Breakouts",
+    "TabFlaws": "Flaws",
+    "TabEffects": "Effects",
+    "TabNotes": "Notes",
+    "Abilities": "Abilities",
+    "Flaws": "Flaws",
+    "Keywords": "Keywords",
+    "Breakouts": "Breakouts",
     "Standalone": "Standalone",
-
     "NoAbilities": "No abilities. Click + to add one.",
-    "NoFlaws":     "No flaws recorded.",
+    "NoFlaws": "No flaws recorded.",
     "EmptyKeywords": "No keywords yet. Create one to start building your character.",
     "EmptyStandalones": "No standalone abilities yet. Add one to get started.",
-    "EmptyConsequences": "No consequences. You’re clean and healthy.",
+    "EmptyConsequences": "No consequences. You\u2019re clean and healthy.",
     "EmptyBenefits": "No benefits active.",
-    "EmptyBreakouts": "No breakouts yet — add one to this keyword.",
-
-    "AddAbility":  "Add Ability",
-    "AddKeyword":  "Add Keyword",
+    "EmptyBreakouts": "No breakouts yet \u2014 add one to this keyword.",
+    "AddAbility": "Add Ability",
+    "AddKeyword": "Add Keyword",
     "AddBreakout": "Add Breakout",
     "Edit": "Edit",
     "Delete": "Delete",
-
     "NewItem": "New {type}",
-
-    "Rating":       "Rating",
-    "AbilityType":  "Ability Type",
-    "BreakoutBonus":"Breakout Bonus",
-    "Description":  "Description",
-    "Severity":     "Severity",
-    "Source":       "Source",
-    "Recovering":   "Recovering",
-    "Bonus":        "Bonus Amount",
-    "ExpiresOn":    "Expires When",
-
+    "Rating": "Rating",
+    "AbilityType": "Ability Type",
+    "BreakoutBonus": "Breakout Bonus",
+    "Description": "Description",
+    "Severity": "Severity",
+    "Source": "Source",
+    "Recovering": "Recovering",
+    "Bonus": "Bonus Amount",
+    "ExpiresOn": "Expires When",
     "Occupation": "Occupation",
-    "Community":  "Community",
-    "Homeland":   "Homeland",
-
-    "StoryPoints":       "Story Points",
-    "StoryPointSpend":   "Spend a Story Point",
-
+    "Community": "Community",
+    "Homeland": "Homeland",
+    "StoryPoints": "Story Points",
+    "StoryPointSpend": "Spend a Story Point",
     "Experience": "Experience",
     "DecreaseExperience": "Decrease",
     "IncreaseExperience": "Increase",
     "Advances": "Advances",
-
     "Advancement": {
       "Heading": "Advance",
       "Title": "Advance an Ability",
@@ -75,7 +64,6 @@
       "Result": "{name} advanced to {newRating} (spent {cost} XP).",
       "Created": "Created {name} (spent {cost} XP)."
     },
-
     "PenaltyTotal": "Penalty Total",
     "BonusTotal": "Bonus Total",
     "NextContestEffects": {
@@ -88,61 +76,65 @@
     "ResolutionPoints": "Resolution Points",
     "IncreaseResolution": "Increase",
     "DecreaseResolution": "Decrease",
-
     "Consequences": "Consequences",
-    "Benefits":     "Benefits",
-
+    "Benefits": "Benefits",
     "Consequence": {
-      "Hurt":    "Hurt",
+      "Hurt": "Hurt",
       "Injured": "Injured",
-      "Dying":   "Dying",
-      "Dead":    "Dead"
+      "Dying": "Dying",
+      "Dead": "Dead"
     },
-
     "ResistanceLadder": {
-      "Automatic":     "Automatic (no roll)",
-      "VeryEasy":      "Very Easy — 6",
-      "Easy":          "Easy — 9",
-      "Moderate":      "Moderate — 14",
-      "Hard":          "Hard — 18",
-      "VeryHard":      "Very Hard — 1M",
-      "Formidable":    "Formidable — 5M",
-      "Stiff":         "Stiff — 10M",
-      "VeryStiff":     "Very Stiff — 15M",
-      "Overwhelming":  "Overwhelming — 1M2"
+      "Automatic": "Automatic (no roll)",
+      "VeryEasy": "Very Easy \u2014 6",
+      "Easy": "Easy \u2014 9",
+      "Moderate": "Moderate \u2014 14",
+      "Hard": "Hard \u2014 18",
+      "VeryHard": "Very Hard \u2014 1M",
+      "Formidable": "Formidable \u2014 5M",
+      "Stiff": "Stiff \u2014 10M",
+      "VeryStiff": "Very Stiff \u2014 15M",
+      "Overwhelming": "Overwhelming \u2014 1M2"
     },
     "ResistanceObstacle": {
-      "LockedDoor": "Locked Door — 14",
-      "Guard": "Guard — 18",
-      "Storm": "Storm / Hazard — 20"
+      "LockedDoor": "Locked Door \u2014 14",
+      "Guard": "Guard \u2014 18",
+      "Storm": "Storm / Hazard \u2014 20"
     },
-
     "ResistanceRating": "Resistance Rating",
-    "NpcType":          "NPC Type",
-
+    "NpcType": "NPC Type",
     "ContestResult": {
       "Title": "Contest Result",
       "Outcome": "Outcome",
-      "CompleteVictory":  "Complete Victory",
-      "MarginalVictory":  "Marginal Victory",
-      "MarginalDefeat":   "Marginal Defeat",
-      "CompleteDefeat":   "Complete Defeat",
-      "Tie":              "Tie",
-      "SpentStoryPoint":  "Spent a Story Point"
+      "CompleteVictory": "Complete Victory",
+      "MarginalVictory": "Marginal Victory",
+      "MarginalDefeat": "Marginal Defeat",
+      "CompleteDefeat": "Complete Defeat",
+      "Tie": "Tie",
+      "SpentStoryPoint": "Spent a Story Point",
+      "AutoSuccess": "Automatic success (no roll needed)",
+      "AutoSuccessNote": "This contest was resolved automatically due to auto-success.",
+      "Narration": {
+        "CompleteVictory": "The hero dominates the challenge!",
+        "MarginalVictory": "The hero scrapes through with a win.",
+        "Tie": "Both sides stand their ground.",
+        "MarginalDefeat": "The hero is pushed back this time.",
+        "CompleteDefeat": "The challenge overwhelms the hero."
+      },
+      "RerollStoryPoint": "Spend 1 Story Point to reroll",
+      "ApplyRp": "Apply Resolution Points"
     },
-
     "Roll": {
-      "RollingFor":   "Rolling for",
-      "vs":           "vs.",
-      "Resistance":   "Resistance",
-      "HeroDie":      "Hero Roll",
-      "OppositionDie":"Opposition Roll",
-      "Mastery":      "Mastery",
-      "Bump":         "Bump!"
+      "RollingFor": "Rolling for",
+      "vs": "vs.",
+      "Resistance": "Resistance",
+      "HeroDie": "Hero Roll",
+      "OppositionDie": "Opposition Roll",
+      "Mastery": "Mastery",
+      "Bump": "Bump!"
     },
     "RollAbility": "Roll ability",
     "RollNotImplemented": "Roll is not implemented yet (placeholder).",
-
     "ContestDialog": {
       "Title": "Contest",
       "Attacker": "Attacker",
@@ -157,7 +149,6 @@
       "WagerHelp": "You can wager RP to multiply the result (higher risk/reward).",
       "Roll": "Roll"
     },
-
     "GroupContest": {
       "Title": "Group Contest",
       "DialogTitle": "Group Contest",
@@ -168,14 +159,12 @@
       "NoAbilities": "The primary actor has no abilities to roll.",
       "Outcome": "Group Outcome"
     },
-
     "ContestLauncher": {
       "Title": "Quick Contest Launcher",
       "NoToken": "Select a token with a character actor to start a contest.",
       "NoAbilities": "The selected actor has no abilities to roll.",
       "ChooseAbility": "Choose an ability to roll"
     },
-
     "ContestRoll": {
       "Title": "Contest Roll",
       "Hero": "Hero",
@@ -185,37 +174,14 @@
       "Modifiers": "Modifiers",
       "Situational": "Situational"
     },
-    "ContestResult": {
-      "Title": "Contest Result",
-      "Outcome": "Outcome",
-      "CompleteVictory":  "Complete Victory",
-      "MarginalVictory":  "Marginal Victory",
-      "MarginalDefeat":   "Marginal Defeat",
-      "CompleteDefeat":   "Complete Defeat",
-      "Tie":              "Tie",
-      "SpentStoryPoint":  "Spent a Story Point",
-      "AutoSuccess": "Automatic success (no roll needed)",
-      "AutoSuccessNote": "This contest was resolved automatically due to auto-success.",
-      "Narration": {
-        "CompleteVictory": "The hero dominates the challenge!",
-        "MarginalVictory": "The hero scrapes through with a win.",
-        "Tie": "Both sides stand their ground.",
-        "MarginalDefeat": "The hero is pushed back this time.",
-        "CompleteDefeat": "The challenge overwhelms the hero."
-      },
-      "RerollStoryPoint": "Spend 1 Story Point to reroll",
-      "ApplyRp": "Apply Resolution Points"
-    },
-
     "Sequence": {
       "Success": "The sequence is complete! You achieved your goal.",
       "Failure": "The sequence ends in failure and the situation slips away.",
       "StrongSuccess": "You claim a resounding victory. This feels like a strong outcome.",
       "WeakSuccess": "You barely get there, but you succeed.",
-      "WeakFailure": "You falter and fail, but it isn’t total collapse.",
+      "WeakFailure": "You falter and fail, but it isn\u2019t total collapse.",
       "StrongFailure": "You crash hard; the setback is significant."
     },
-
     "SequenceEffect": {
       "Source": "Sequence outcome",
       "Applied": "Applied",
@@ -232,11 +198,9 @@
         "StrongFailure": "You suffer a serious consequence from the setback."
       }
     },
-
     "Notifications": {
       "RequestSent": "Request sent to the GM. They can approve and apply the effect."
     },
-
     "SceneTracker": {
       "Title": "Scene Tracker",
       "Button": "Scene Tracker",
@@ -251,24 +215,20 @@
       "ClearConfirm": "Clear",
       "ClearCancel": "Cancel"
     },
-
     "ResistanceRoll": {
       "Button": "Resistance Roller",
       "Title": "Resistance Roll",
       "Result": "Rolled: {{label}} (TN {{resistance}})."
     },
-
     "AwardXp": {
       "NoToken": "Select one or more tokens to award XP.",
       "NoActors": "No character actors are selected.",
       "Notice": "Awarded {amount} XP to {count} character(s)."
     },
-
     "Macros": {
       "NotGM": "Only the GM can create default macros.",
       "CreateResult": "Macro installation complete. {message}"
     },
-
     "Settings": {
       "DefaultResistance": {
         "Name": "Default Resistance",
@@ -287,7 +247,6 @@
         "Hint": "When disabled, story point rerolls and upgrades are not available in contests."
       }
     },
-
     "NpcSheet": {
       "SelectHeroToken": "Select a player token to roll against this NPC.",
       "HeroNoAbilities": "The selected token has no abilities.",
@@ -295,14 +254,19 @@
       "HeroAbility": "Player Ability",
       "SelectHeroAbilityTitle": "Choose a Player Ability"
     },
-
     "Confirm": "Confirm",
     "Cancel": "Cancel",
     "ItemType": {
-      "ability":     "Ability",
-      "flaw":        "Flaw",
-      "benefit":     "Benefit",
+      "ability": "Ability",
+      "flaw": "Flaw",
+      "benefit": "Benefit",
       "consequence": "Consequence"
+    },
+    "Tab": {
+      "abilities": "Abilities",
+      "flaws": "Flaws",
+      "effects": "Effects",
+      "notes": "Notes"
     }
   }
 }

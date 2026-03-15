@@ -1,0 +1,54 @@
+<div class="tab effects {{tab.cssClass}}" data-group="primary" data-tab="effects">
+
+  <div class="effects-section">
+    <div class="abilities-toolbar flexrow">
+      <h3>{{localize "QUESTWORLDS.Consequences"}}</h3>
+      <a data-action="itemCreate" data-type="consequence"><i class="fas fa-plus"></i></a>
+    </div>
+    {{#if consequences.length}}
+      {{#each consequences as |item|}}
+        <div class="effect-row flexrow" data-item-id="{{item.id}}">
+          <span class="effect-icon"><i class="fas fa-skull-crossbones"></i></span>
+          <span class="effect-name">{{item.name}}</span>
+          <span class="effect-severity">{{qwSeverityLabel item.system.severity}}</span>
+          <span class="effect-penalty">{{qwPenalty item.system.severity}}</span>
+          <div class="item-controls flexrow">
+            <a data-action="itemEdit" data-item-id="{{item.id}}"><i class="fas fa-edit"></i></a>
+            <a data-action="itemDelete" data-item-id="{{item.id}}"><i class="fas fa-trash"></i></a>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="empty-state">
+        <i class="fas fa-seedling"></i>
+        <span>{{localize "QUESTWORLDS.EmptyConsequences"}}</span>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="effects-section">
+    <div class="abilities-toolbar flexrow">
+      <h3>{{localize "QUESTWORLDS.Benefits"}}</h3>
+      <a data-action="itemCreate" data-type="benefit"><i class="fas fa-plus"></i></a>
+    </div>
+    {{#if benefits.length}}
+      {{#each benefits as |item|}}
+        <div class="effect-row flexrow" data-item-id="{{item.id}}">
+          <span class="effect-icon"><i class="fas fa-plus-circle"></i></span>
+          <span class="effect-name">{{item.name}}</span>
+          <span class="effect-bonus">+{{item.system.bonus}}</span>
+          <div class="item-controls flexrow">
+            <a data-action="itemEdit" data-item-id="{{item.id}}"><i class="fas fa-edit"></i></a>
+            <a data-action="itemDelete" data-item-id="{{item.id}}"><i class="fas fa-trash"></i></a>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="empty-state">
+        <i class="fas fa-seedling"></i>
+        <span>{{localize "QUESTWORLDS.EmptyBenefits"}}</span>
+      </div>
+    {{/if}}
+  </div>
+
+</div>

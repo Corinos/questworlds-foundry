@@ -30,26 +30,34 @@ export class QWCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
   };
 
   static PARTS = {
-    sheet: {
-      template: "systems/questworlds/templates/actors/character-sheet.hbs",
-      scrollable: [".abilities-list", ".notes-tab"],
-    },
+    header:    { template: "systems/questworlds/templates/actors/character-header.hbs" },
+    tabs: { template: "templates/generic/tab-navigation.hbs" },
+    abilities: { template: "systems/questworlds/templates/actors/character-abilities.hbs", scrollable: [""] },
+    flaws:     { template: "systems/questworlds/templates/actors/character-flaws.hbs",     scrollable: [""] },
+    effects:   { template: "systems/questworlds/templates/actors/character-effects.hbs",   scrollable: [""] },
+    notes:     { template: "systems/questworlds/templates/actors/character-notes.hbs",     scrollable: [""] },
   };
 
   /* ------------------------------------------------------------------ */
   /*  Tabs                                                                */
   /* ------------------------------------------------------------------ */
 
+  // tabGroups is inherited from ApplicationV2 and tracks the active tab per group.
+  // We declare the default here; Foundry's changeTab() keeps it updated.
   tabGroups = { primary: "abilities" };
 
-  _getTabs() {
-    return {
-      abilities: { id: "abilities", group: "primary", label: "QUESTWORLDS.TabAbilities", active: this.tabGroups.primary === "abilities", cssClass: this.tabGroups.primary === "abilities" ? "active" : "" },
-      flaws:     { id: "flaws",     group: "primary", label: "QUESTWORLDS.TabFlaws",     active: this.tabGroups.primary === "flaws",     cssClass: this.tabGroups.primary === "flaws"     ? "active" : "" },
-      effects:   { id: "effects",   group: "primary", label: "QUESTWORLDS.TabEffects",   active: this.tabGroups.primary === "effects",   cssClass: this.tabGroups.primary === "effects"   ? "active" : "" },
-      notes:     { id: "notes",     group: "primary", label: "QUESTWORLDS.TabNotes",     active: this.tabGroups.primary === "notes",     cssClass: this.tabGroups.primary === "notes"     ? "active" : "" },
-    };
-  }
+  static TABS = {
+    primary: {
+      tabs: [
+        { id: "abilities" },
+        { id: "flaws"     },
+        { id: "effects"   },
+        { id: "notes"     },
+      ],
+      labelPrefix: "QUESTWORLDS.Tab",
+      initial: "abilities",
+    },
+  };
 
   /* ------------------------------------------------------------------ */
   /*  Context                                                             */
@@ -59,6 +67,7 @@ export class QWCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     const context = await super._prepareContext(options);
     const actor   = this.actor;
 
+    context.actor        = actor;
     context.system       = actor.system;
     context.items        = actor.items;
     context.grouped      = actor.getGroupedAbilities();
@@ -67,7 +76,7 @@ export class QWCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     context.config       = CONFIG.QUESTWORLDS ?? {};
     context.isOwner      = actor.isOwner;
     context.isGM         = game.user.isGM;
-    context.tabs         = this._getTabs();
+    context.tabs         = this._prepareTabs("primary");
 
     context.nextContestEffects = actor.items
       .filter((i) =>
@@ -85,6 +94,19 @@ export class QWCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     return context;
   }
 
+  /**
+   * Set context.tab for each tab part so the template can use {{tab.cssClass}}.
+   * @override
+   */
+  async _preparePartContext(partId, context) {
+    await super._preparePartContext(partId, context);
+    const tabParts = ["abilities", "flaws", "effects", "notes"];
+    if (tabParts.includes(partId)) {
+      context.tab = context.tabs[partId];
+    }
+    return context;
+  }
+
   /* ------------------------------------------------------------------ */
   /*  Listeners                                                           */
   /* ------------------------------------------------------------------ */
@@ -94,11 +116,38 @@ export class QWCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
 
     const html = this.element;
 
+    // Tab switching — Foundry's static TABS handles detection but doesn't
+    // switch single-template panels, so we drive the DOM directly.
+    html.querySelectorAll(".sheet-tabs .item[data-tab]").forEach((navEl) => {
+      navEl.addEventListener("click", () => {
+        const tabId = navEl.dataset.tab;
+        this.tabGroups.primary = tabId;
+
+        html.querySelectorAll(".sheet-tabs .item[data-tab]").forEach((el) =>
+          el.classList.toggle("active", el.dataset.tab === tabId)
+        );
+        html.querySelectorAll(".sheet-body .tab[data-tab]").forEach((el) =>
+          el.classList.toggle("active", el.dataset.tab === tabId)
+        );
+      });
+    });
+
     // Inline editing
     html.querySelectorAll(".inline-name, .inline-rating").forEach((el) =>
       el.addEventListener("change", this._onInlineEdit.bind(this)),
     );
-
+  // Portrait click to edit
+    html.querySelector(".profile-img")?.addEventListener("click", () => {
+      const fp = new FilePicker({
+        type: "image",
+        current: this.actor.img,
+        callback: async (path) => {
+        await this.actor.update({ img: path });
+        this.render();
+      },
+      });
+      fp.browse();
+    });
     // Drag-to-reorder
     html.querySelectorAll("[draggable=true]").forEach((el) => {
       el.addEventListener("dragstart", this._onDragStart.bind(this));

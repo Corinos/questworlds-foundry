@@ -1,0 +1,27 @@
+<div class="tab flaws {{tab.cssClass}}" data-group="primary" data-tab="flaws">
+  <div class="abilities-toolbar flexrow">
+    <h3>{{localize "QUESTWORLDS.Flaws"}}</h3>
+    <a data-action="itemCreate" data-type="flaw">
+      <i class="fas fa-plus"></i>
+    </a>
+  </div>
+
+  {{#if grouped.flaws.length}}
+    {{#each grouped.flaws as |flaw|}}
+      <div class="ability-row flaw flexrow" data-item-id="{{flaw.id}}">
+        <span class="ability-icon"><i class="fas fa-bolt"></i></span>
+        <span class="ability-name">{{flaw.name}}</span>
+        <span class="ability-rating flaw-rating">{{qwRating flaw.system.rating}}</span>
+        <div class="item-controls flexrow">
+          <a data-action="itemEdit" data-item-id="{{flaw.id}}"><i class="fas fa-edit"></i></a>
+          <a data-action="itemDelete" data-item-id="{{flaw.id}}"><i class="fas fa-trash"></i></a>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <div class="empty-state">
+      <i class="fas fa-seedling"></i>
+      <span>{{localize "QUESTWORLDS.NoFlaws"}}</span>
+    </div>
+  {{/if}}
+</div>

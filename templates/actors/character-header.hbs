@@ -1,0 +1,102 @@
+<header class="sheet-header">
+
+  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+
+  <div class="header-grid">
+
+    {{!-- Row 1: Character name --}}
+    <div class="header-name">
+      <input name="name" type="text" value="{{actor.name}}" placeholder="Character Name" />
+    </div>
+
+    {{!-- Row 2: Occupation / Community / Homeland --}}
+    <div class="header-details">
+      <div class="hd-field">
+        <label>{{localize "QUESTWORLDS.Occupation"}}</label>
+        <input type="text" name="system.occupation" value="{{system.occupation}}" />
+      </div>
+      <div class="hd-field">
+        <label>{{localize "QUESTWORLDS.Community"}}</label>
+        <input type="text" name="system.community" value="{{system.community}}" />
+      </div>
+      <div class="hd-field">
+        <label>{{localize "QUESTWORLDS.Homeland"}}</label>
+        <input type="text" name="system.homeland" value="{{system.homeland}}" />
+      </div>
+    </div>
+
+    {{!-- Row 3: Trackers --}}
+    <div class="header-trackers">
+
+      {{!-- Story Points --}}
+      <div class="tracker sp-tracker">
+        <span class="tracker-label">{{localize "QUESTWORLDS.StoryPoints"}}</span>
+        <div class="sp-pips">
+          {{#each (qwRange system.storyPoints.max) as |pip|}}
+            <span
+              class="sp-pip {{#if (qwEq pip ../system.storyPoints.value)}}active{{/if}}"
+              data-action="storyPointClick"
+              data-value="{{pip}}"
+            >◆</span>
+          {{/each}}
+        </div>
+        <span class="tracker-value">{{system.storyPoints.value}}/{{system.storyPoints.max}}</span>
+      </div>
+
+      {{!-- Experience --}}
+      <div class="tracker xp-tracker">
+        <span class="tracker-label">{{localize "QUESTWORLDS.Experience"}}</span>
+        <div class="tracker-controls">
+          <button type="button" data-action="xpDecrement" title="{{localize "QUESTWORLDS.DecreaseExperience"}}">−</button>
+          <span class="tracker-value">{{system.experience.value}}</span>
+          <button type="button" data-action="xpIncrement" title="{{localize "QUESTWORLDS.IncreaseExperience"}}">+</button>
+          <button type="button" data-action="xpAdvance" title="{{localize "QUESTWORLDS.Advancement.Heading"}}">⇧</button>
+        </div>
+        <span class="tracker-sub">{{localize "QUESTWORLDS.Advances"}}: {{system.experience.advances}}</span>
+      </div>
+
+      {{!-- Resolution Points --}}
+      <div class="tracker rp-tracker">
+        <span class="tracker-label">{{localize "QUESTWORLDS.ResolutionPoints"}}</span>
+        <div class="tracker-controls">
+          <button type="button" data-action="rpDecrement" title="{{localize "QUESTWORLDS.DecreaseResolution"}}">−</button>
+          <span class="tracker-value">{{system.resolutionPoints.value}}</span>
+          <button type="button" data-action="rpIncrement" title="{{localize "QUESTWORLDS.IncreaseResolution"}}">+</button>
+        </div>
+        <span class="tracker-sub">/ {{system.resolutionPoints.max}}</span>
+      </div>
+
+      {{!-- Penalty / Bonus --}}
+      <div class="tracker pb-tracker">
+        <span class="tracker-label">{{localize "QUESTWORLDS.PenaltyTotal"}}</span>
+        <span class="tracker-value penalty">{{system.penaltyTotal}}</span>
+        <span class="tracker-label">{{localize "QUESTWORLDS.BonusTotal"}}</span>
+        <span class="tracker-value bonus">+{{system.bonusTotal}}</span>
+      </div>
+
+    </div>
+
+    {{!-- Next-contest effects (full width, only shown when needed) --}}
+    {{#if nextContestEffects.length}}
+      <div class="next-contest-effects">
+        <div class="next-contest-effects__header">
+          <strong>{{localize "QUESTWORLDS.NextContestEffects.Title"}}</strong>
+          {{#if (or isOwner isGM)}}
+            <button type="button" data-action="clearNextContestEffects" title="{{localize "QUESTWORLDS.NextContestEffects.ClearTitle"}}">
+              <i class="fas fa-trash"></i>
+            </button>
+          {{/if}}
+        </div>
+        <ul>
+          {{#each nextContestEffects as |effect|}}
+            <li class="next-contest-effect next-contest-effect--{{effect.type}}">
+              <strong>{{effect.name}}</strong>
+              {{#if effect.description}}<div class="next-contest-effect__desc">{{{effect.description}}}</div>{{/if}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+  </div>
+</header>

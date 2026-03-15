@@ -122,17 +122,17 @@ export function registerHandlebarsHelpers() {
 /* ------------------------------------------------------------------ */
 export async function preloadHandlebarsTemplates() {
   const templatePaths = [
-    // Actor sheet partials
+    // Actor sheet partials (used via {{> partial}} in templates)
     "systems/questworlds/templates/partials/ability-list.hbs",
     "systems/questworlds/templates/partials/keyword-block.hbs",
     "systems/questworlds/templates/partials/consequence-list.hbs",
     "systems/questworlds/templates/partials/benefit-list.hbs",
     "systems/questworlds/templates/partials/story-points.hbs",
-    // Chat partials
+    // Chat message templates
     "systems/questworlds/templates/chat/contest-result.hbs",
     "systems/questworlds/templates/chat/contest-roll.hbs",
-    "systems/questworlds/templates/scene/scene-tracker.hbs",
-    // Apps
+    // App templates
+    // "systems/questworlds/templates/apps/scene-tracker.hbs",
     "systems/questworlds/templates/apps/seed-content.hbs",
   ];
 

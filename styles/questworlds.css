@@ -15,6 +15,7 @@
   --qw-color-muted:      #6b5f4a;
   --qw-color-flaw:       #7a4a2c;
   --qw-color-mastery:    #7a2c2c;
+  --qw-color-text-secondary: #915b0b;
   --qw-font-primary:     "Palatino Linotype", Palatino, "Book Antiqua", serif;
   --qw-font-ui:          "Signika", sans-serif;
   --qw-border-radius:    4px;
@@ -31,9 +32,11 @@
 }
 
 /* ---- Sheet Header ----------------------------------------- */
+/* ---- Sheet Header ----------------------------------------- */
 .questworlds .sheet-header {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 10px;
   flex: 0 0 auto;
   padding: 8px;
   border-bottom: 2px solid var(--qw-color-border);
@@ -41,23 +44,25 @@
 }
 
 .questworlds .profile-img {
-  flex: 0 0 100px;
-  height: 100px;
+  grid-row: 1;
+  width: 88px;
+  height: 88px;
   object-fit: cover;
   border: 2px solid var(--qw-color-border);
   border-radius: var(--qw-border-radius);
   cursor: pointer;
-  margin-right: 12px;
 }
 
-.questworlds .header-fields {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+/* Right column: name / details / trackers stacked */
+.questworlds .header-grid {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 6px;
+  min-width: 0;
 }
 
-.questworlds .charname input {
+/* Row 1: Character name */
+.questworlds .header-name input {
   width: 100%;
   font-family: var(--qw-font-primary);
   font-size: 1.4em;
@@ -67,138 +72,123 @@
   background: transparent;
   color: var(--qw-color-primary);
   padding: 2px 4px;
+  box-sizing: border-box;
 }
 
+/* Row 2: Occupation / Community / Homeland — equal columns */
 .questworlds .header-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  flex-wrap: wrap;
 }
 
-.questworlds .header-details .form-group {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 120px;
+.questworlds .hd-field {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 2px;
 }
 
-.questworlds .header-details label {
+.questworlds .hd-field label {
   font-size: 0.7em;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--qw-color-muted);
-  margin-bottom: 2px;
 }
 
-.questworlds .header-details input {
+.questworlds .hd-field input {
   border: none;
   border-bottom: 1px solid var(--qw-color-border);
   background: transparent;
   font-size: 0.85em;
   padding: 2px 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* ---- Story Points ----------------------------------------- */
-.questworlds .story-points {
-  display: flex;
-  align-items: center;
+/* Row 3: Trackers — SP / XP / RP / Pen+Bonus side by side */
+.questworlds .header-trackers {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
   gap: 8px;
-  margin-top: 4px;
+  align-items: start;
 }
 
-.questworlds .sp-label {
-  font-size: 0.75em;
+.questworlds .tracker {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 2px;
+  align-items: center;
+  justify-items: center;
+}
+
+.questworlds .tracker-label {
+  font-size: 0.68em;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--qw-color-muted);
+  white-space: nowrap;
 }
 
+.questworlds .tracker-value {
+  font-weight: bold;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.questworlds .tracker-sub {
+  font-size: 0.72em;
+  color: var(--qw-color-muted);
+  white-space: nowrap;
+}
+
+.questworlds .tracker-controls {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.questworlds .tracker-controls button {
+  border: 1px solid var(--qw-color-border);
+  background: transparent;
+  color: var(--qw-color-primary);
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.85em;
+  line-height: 1;
+  padding: 0;
+}
+
+.questworlds .tracker-controls button:hover {
+  background: var(--qw-color-bg-dark);
+}
+
+/* Story Points pip track */
 .questworlds .sp-pips {
   display: flex;
-  gap: 4px;
+  gap: 3px;
 }
 
-/* ---- XP / Advances ---------------------------------------- */
-.questworlds .xp-tracker {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.questworlds .xp-controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.questworlds .xp-controls button {
-  border: 1px solid var(--qw-color-border);
-  background: transparent;
-  color: var(--qw-color-primary);
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
+.questworlds .sp-pip {
+  color: var(--qw-color-bg-dark);
+  font-size: 1em;
   cursor: pointer;
-  font-weight: bold;
+  transition: color 0.15s;
 }
 
-.questworlds .xp-value {
-  min-width: 28px;
-  text-align: center;
-  font-weight: bold;
+.questworlds .sp-pip.active {
+  color: var(--qw-color-secondary);
 }
 
-.questworlds .xp-advances {
-  font-size: 0.85em;
-  color: var(--qw-color-muted);
-}
-
-/* ---- Resolution Points ----------------------------------- */
-.questworlds .rp-tracker {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.questworlds .rp-controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.questworlds .rp-controls button {
-  border: 1px solid var(--qw-color-border);
-  background: transparent;
+.questworlds .sp-pip:hover {
   color: var(--qw-color-primary);
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
 }
 
-.questworlds .rp-value {
-  min-width: 28px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.questworlds .rp-max {
-  font-size: 0.85em;
-  color: var(--qw-color-muted);
-}
-
-/* ---- Penalty / Bonus summary ------------------------------- */
-.questworlds .penalty-bonus {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 4px;
-  font-size: 0.9em;
-}
-
+/* Penalty / Bonus colours */
 .questworlds .penalty {
   color: var(--qw-color-flaw);
 }
@@ -433,15 +423,19 @@
 }
 
 /* ---- Tabs -------------------------------------------------- */
-.questworlds .sheet-tabs {
+.questworlds .sheet-tabs,
+.questworlds nav.tabs {
   flex: 0 0 auto;
   display: flex;
   flex-direction: row;
   border-bottom: 2px solid var(--qw-color-border);
   background: var(--qw-color-bg-dark);
+  margin: 0;
+  padding: 0;
 }
 
-.questworlds .sheet-tabs .item {
+.questworlds .sheet-tabs .item,
+.questworlds nav.tabs .item {
   flex: 1;
   text-align: center;
   padding: 6px 8px;
@@ -449,29 +443,47 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--qw-color-muted);
+  color: var(--qw-color-text-secondary);
   border-right: 1px solid var(--qw-color-border);
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.questworlds .sheet-tabs .item:last-child,
+.questworlds nav.tabs .item:last-child {
+  border-right: none;
 }
 
 .questworlds .sheet-tabs .item:hover,
-.questworlds .sheet-tabs .item.active {
+.questworlds .sheet-tabs .item.active,
+.questworlds nav.tabs .item:hover,
+.questworlds nav.tabs .item.active {
   background: var(--qw-color-primary);
   color: var(--qw-color-secondary);
 }
 
-/* ---- Sheet Body ------------------------------------------- */
-.questworlds .sheet-body {
-  flex: 1;
-  overflow: hidden;
-  padding: 8px;
+/* Override Foundry's nav.tabs [data-tab] colour rule */
+.questworlds nav.tabs [data-tab] {
+  color: var(--qw-color-text-secondary);
 }
 
+.questworlds nav.tabs [data-tab]:hover,
+.questworlds nav.tabs [data-tab].active {
+  background: var(--qw-color-primary);
+  color: var(--qw-color-secondary);
+}
+
+/* ---- Tab Panels ------------------------------------------- */
+/* In multi-part mode panels are direct children of window-content */
 .questworlds .tab {
   display: none;
-  height: 100%;
+  flex: 1;
+  padding: 8px;
   overflow-y: auto;
+  background: var(--qw-color-bg);
+  color: var(--qw-color-text);
 }
 
 .questworlds .tab.active {
@@ -513,10 +525,15 @@
 }
 
 /* ---- Ability Rows ----------------------------------------- */
+/* Grid layout: icon | name | rating | controls
+   All row types (keyword, standalone, breakout) share identical
+   column positions — no flex fighting over leftover space.       */
+
 .questworlds .ability-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 24px 1fr 52px 44px;
   align-items: center;
-  padding: 4px 6px;
+  padding: 3px 6px;
   border-bottom: 1px solid rgba(139, 115, 85, 0.2);
   transition: background 0.1s;
 }
@@ -530,33 +547,94 @@
   font-weight: bold;
 }
 
+/* Breakout: indent the name cell content, not the column */
 .questworlds .ability-row.breakout {
-  padding-left: 24px;
   font-size: 0.92em;
 }
 
-.questworlds .breakout-name {
+.questworlds .ability-row.breakout .ability-name {
+  padding-left: 16px;
   color: var(--qw-color-muted);
 }
 
+/* Icon column */
+.questworlds .ability-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--qw-color-accent);
+}
+
+/* Name column */
 .questworlds .ability-name {
-  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-family: var(--qw-font-primary);
+  min-width: 0;
+}
+
+.questworlds .ability-name .inline-name {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--qw-color-text);
+  padding: 1px 2px;
+}
+
+.questworlds .ability-name .inline-name:focus {
+  border-bottom-color: var(--qw-color-border);
+  outline: none;
 }
 
 .questworlds .ability-name a {
-  color: var(--qw-color-text);
+  flex: 0 0 auto;
+  color: var(--qw-color-muted);
   text-decoration: none;
   cursor: pointer;
+  font-size: 0.85em;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.questworlds .ability-row:hover .ability-name a {
+  opacity: 1;
 }
 
 .questworlds .ability-name a:hover {
   color: var(--qw-color-primary);
 }
 
-/* ---- Ability Ratings -------------------------------------- */
+/* Rating column */
+.questworlds .inline-rating {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: var(--qw-color-bg);
+  font-family: var(--qw-font-primary);
+  font-size: 1em;
+  font-weight: bold;
+  color: var(--qw-color-primary);
+  text-align: center;
+  padding: 1px 2px;
+}
+
+.questworlds .inline-rating:focus {
+  border-bottom-color: var(--qw-color-border);
+  outline: none;
+}
+
+/* Controls column */
+.questworlds .ability-row .item-controls {
+  justify-content: flex-end;
+}
+
+/* ---- Ability Ratings (read-only display, e.g. flaws) ------ */
 .questworlds .ability-rating {
-  flex: 0 0 60px;
   text-align: center;
   font-family: var(--qw-font-primary);
   font-size: 1.05em;

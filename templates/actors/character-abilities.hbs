@@ -1,0 +1,91 @@
+<div class="tab abilities {{tab.cssClass}}" data-group="primary" data-tab="abilities">
+  <div class="abilities-toolbar flexrow">
+    <h3>{{localize "QUESTWORLDS.Abilities"}}</h3>
+    <a data-action="itemCreate" data-type="ability" title="{{localize 'QUESTWORLDS.AddAbility'}}">
+      <i class="fas fa-plus"></i>
+    </a>
+  </div>
+
+  {{!-- Keyword groups --}}
+  <div class="keyword-list" data-sort-container="keywords">
+    {{#if grouped.keywords.length}}
+      {{#each grouped.keywords as |group|}}
+        <div class="keyword-block" data-item-id="{{group.item.id}}" draggable="true">
+          <div class="ability-row keyword" data-item-id="{{group.item.id}}" draggable="true">
+            <span class="ability-icon"><i class="fas fa-key"></i></span>
+            <span class="ability-name">
+              <input class="inline-name" data-item-id="{{group.item.id}}" data-field="name" value="{{group.item.name}}" />
+              <a data-action="abilityRoll" data-item-id="{{group.item.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
+            </span>
+            <input class="inline-rating" type="number" min="1" max="100" step="1" data-item-id="{{group.item.id}}" data-field="system.rating" value="{{group.item.system.rating}}" />
+            <div class="item-controls">
+              <a data-action="itemEdit" data-item-id="{{group.item.id}}" title="{{localize "QUESTWORLDS.Edit"}}"><i class="fas fa-edit"></i></a>
+              <a data-action="itemDelete" data-item-id="{{group.item.id}}" title="{{localize "QUESTWORLDS.Delete"}}"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+
+          {{!-- Breakouts --}}
+          <div class="breakouts-list" data-sort-container="breakouts">
+            {{#if group.breakouts.length}}
+              {{#each group.breakouts as |breakout|}}
+                <div class="ability-row breakout" data-item-id="{{breakout.id}}" draggable="true">
+                  <span class="ability-icon"><i class="fas fa-code-branch"></i></span>
+                  <span class="ability-name">
+                    ↳ <input class="inline-name" data-item-id="{{breakout.id}}" data-field="name" value="{{breakout.name}}" />
+                    <a data-action="abilityRoll" data-item-id="{{breakout.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
+                  </span>
+                  <input class="inline-rating" type="number" min="1" max="100" step="1" data-item-id="{{breakout.id}}" data-field="effectiveRating" value="{{breakout.effectiveRating}}" />
+                  <div class="item-controls">
+                    <a data-action="itemEdit" data-item-id="{{breakout.id}}" title="{{localize "QUESTWORLDS.Edit"}}"><i class="fas fa-edit"></i></a>
+                    <a data-action="itemDelete" data-item-id="{{breakout.id}}" title="{{localize "QUESTWORLDS.Delete"}}"><i class="fas fa-trash"></i></a>
+                  </div>
+                </div>
+              {{/each}}
+            {{else}}
+              <div class="empty-state">
+                <i class="fas fa-seedling"></i>
+                <span>{{localize "QUESTWORLDS.EmptyBreakouts"}}</span>
+              </div>
+            {{/if}}
+          </div>
+
+          <div class="breakout-add">
+            <a data-action="itemCreate" data-type="ability" data-ability-type="breakout" data-keyword-id="{{group.item.id}}">
+              <i class="fas fa-plus"></i> {{localize "QUESTWORLDS.AddBreakout"}}
+            </a>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="empty-state">
+        <i class="fas fa-seedling"></i>
+        <span>{{localize "QUESTWORLDS.EmptyKeywords"}}</span>
+      </div>
+    {{/if}}
+  </div>
+
+  {{!-- Standalone abilities --}}
+  <div class="standalone-list" data-sort-container="standalone">
+    {{#if grouped.standalone.length}}
+      {{#each grouped.standalone as |ability|}}
+        <div class="ability-row standalone" data-item-id="{{ability.id}}" draggable="true">
+          <span class="ability-icon"><i class="fas fa-shield-alt"></i></span>
+          <span class="ability-name">
+            <input class="inline-name" data-item-id="{{ability.id}}" data-field="name" value="{{ability.name}}" />
+            <a data-action="abilityRoll" data-item-id="{{ability.id}}" title="{{localize "QUESTWORLDS.RollAbility"}}"><i class="fas fa-dice"></i></a>
+          </span>
+          <input class="inline-rating" type="number" min="1" max="100" step="1" data-item-id="{{ability.id}}" data-field="system.rating" value="{{ability.system.rating}}" />
+          <div class="item-controls">
+            <a data-action="itemEdit" data-item-id="{{ability.id}}" title="{{localize "QUESTWORLDS.Edit"}}"><i class="fas fa-edit"></i></a>
+            <a data-action="itemDelete" data-item-id="{{ability.id}}" title="{{localize "QUESTWORLDS.Delete"}}"><i class="fas fa-trash"></i></a>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="empty-state">
+        <i class="fas fa-seedling"></i>
+        <span>{{localize "QUESTWORLDS.EmptyStandalones"}}</span>
+      </div>
+    {{/if}}
+  </div>
+</div>
