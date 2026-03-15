@@ -2,7 +2,7 @@
   "id": "questworlds",
   "title": "QuestWorlds",
   "description": "An implementation of the QuestWorlds SRD for Foundry Virtual Tabletop. QuestWorlds is a narrative roleplaying game system by Chaosium Inc.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authors": [
     {
       "name": "ScottlyMac"
@@ -39,5 +39,5 @@
   "packs": [],
   "packFolders": [],
   "socket": false,
-  "download": "https://github.com/Corinos/questworlds-foundry/archive/refs/tags/0.1.0.zip"
+  "download": "https://github.com/Corinos/questworlds-foundry/archive/refs/tags/0.2.0.zip"
 }
