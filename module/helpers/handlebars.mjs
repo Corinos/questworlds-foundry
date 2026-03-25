@@ -85,21 +85,22 @@ export function registerHandlebarsHelpers() {
   // Localisation shorthand
   Handlebars.registerHelper("qwLocalize", (key) => game.i18n.localize(key));
 
-  // Severity label for consequences
-  Handlebars.registerHelper("qwSeverityLabel", (severity) => {
+  // Degree label for consequences (0–4)
+  Handlebars.registerHelper("qwSeverityLabel", (degree) => {
     const labels = {
+      0: game.i18n.localize("QUESTWORLDS.Consequence.Stung"),
       1: game.i18n.localize("QUESTWORLDS.Consequence.Hurt"),
       2: game.i18n.localize("QUESTWORLDS.Consequence.Injured"),
       3: game.i18n.localize("QUESTWORLDS.Consequence.Dying"),
       4: game.i18n.localize("QUESTWORLDS.Consequence.Dead"),
     };
-    return labels[severity] ?? severity;
+    return labels[degree] ?? degree;
   });
 
-  // Penalty display (–3, –6, –9)
-  Handlebars.registerHelper("qwPenalty", (severity) => {
-    if (severity >= 4) return game.i18n.localize("QUESTWORLDS.Consequence.Dead");
-    return `–${severity * 3}`;
+  // Penalty display (–5, –10, –15, –20 per degree of defeat)
+  Handlebars.registerHelper("qwPenalty", (degree) => {
+    if (degree >= 4) return game.i18n.localize("QUESTWORLDS.Consequence.Dead");
+    return `–${degree * 5}`;
   });
 
   // Check if value equals comparator (useful in templates)

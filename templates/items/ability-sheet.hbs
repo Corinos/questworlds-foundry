@@ -4,7 +4,7 @@
     <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields">
       <h1><input name="name" type="text" value="{{item.name}}" /></h1>
-      <div class="item-type-badge">{{localize (qwConcat "QUESTWORLDS.ItemType." item.type)}}</div>
+      <div class="item-type-badge">{{localize (concat "QUESTWORLDS.ItemType." item.type)}}</div>
     </div>
   </header>
 
@@ -45,11 +45,12 @@
     {{#if (qwEq item.type "consequence")}}
       <div class="form-group">
         <label>{{localize "QUESTWORLDS.Severity"}}</label>
-        <select name="system.severity">
-          <option value="1" {{#if (qwEq system.severity 1)}}selected{{/if}}>1 — Hurt (–3)</option>
-          <option value="2" {{#if (qwEq system.severity 2)}}selected{{/if}}>2 — Injured (–6)</option>
-          <option value="3" {{#if (qwEq system.severity 3)}}selected{{/if}}>3 — Dying (–9)</option>
-          <option value="4" {{#if (qwEq system.severity 4)}}selected{{/if}}>4 — Dead</option>
+        <select name="system.degree">
+          <option value="0" {{#if (qwEq system.degree 0)}}selected{{/if}}>0 — {{localize "QUESTWORLDS.Consequence.Stung"}} (–5)</option>
+          <option value="1" {{#if (qwEq system.degree 1)}}selected{{/if}}>1 — {{localize "QUESTWORLDS.Consequence.Hurt"}} (–10)</option>
+          <option value="2" {{#if (qwEq system.degree 2)}}selected{{/if}}>2 — {{localize "QUESTWORLDS.Consequence.Injured"}} (–15)</option>
+          <option value="3" {{#if (qwEq system.degree 3)}}selected{{/if}}>3 — {{localize "QUESTWORLDS.Consequence.Dying"}} (–20)</option>
+          <option value="4" {{#if (qwEq system.degree 4)}}selected{{/if}}>4 — {{localize "QUESTWORLDS.Consequence.Dead"}}</option>
         </select>
       </div>
       <div class="form-group">

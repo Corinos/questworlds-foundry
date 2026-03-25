@@ -129,31 +129,27 @@ export class QWConsequenceData extends TypeDataModel {
   static defineSchema() {
     return {
       /**
-       * Consequence severity per QuestWorlds SRD:
-       *   1 = Hurt        (–3)
-       *   2 = Injured     (–6)
-       *   3 = Dying       (–9)
-       *   4 = Dead / Out of contest (not a modifier — removes from play)
-       * For abilities:
-       *   1 = Impaired    (–3)
-       *   2 = Injured     (–6)
-       *   3 = Broken      (–9)
-       *   4 = Destroyed
+       * Consequence degree per QuestWorlds rules (degree of defeat):
+       *   0 = Stung       (–5)   Victory at a price / defeat with a silver lining
+       *   1 = Hurt        (–10)  Clear outcome, lasting but manageable
+       *   2 = Injured     (–15)  Significant, lasting days or weeks
+       *   3 = Dying       (–20)  Major, story-changing
+       *   4 = Dead / Out of contest — removed from scene, handled narratively
        */
-      severity: new fields.NumberField({
+      degree: new fields.NumberField({
         required: true,
         integer: true,
-        min: 1,
+        min: 0,
         max: 4,
         initial: 1,
       }),
 
-      // Computed penalty (–3 per severity level, capped at –9 for active)
+      // Computed penalty (degree × –5; 0 for degree 4 — handled narratively)
       // Stored for quick access; recalculated in prepareDerivedData
       penalty: new fields.NumberField({
         required: true,
         integer: true,
-        initial: -3,
+        initial: -10,
       }),
 
       // Source: what contest / narrative event caused this
@@ -166,13 +162,13 @@ export class QWConsequenceData extends TypeDataModel {
     };
   }
 
-  /** Derive penalty from severity */
+  /** Derive penalty from degree of defeat */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.severity < 4) {
-      this.penalty = -(this.severity * 3);
+    if (this.degree < 4) {
+      this.penalty = -(this.degree * 5);
     } else {
-      this.penalty = 0; // Dead/Destroyed — handled narratively
+      this.penalty = 0; // Dead/Out of contest — handled narratively
     }
   }
 }

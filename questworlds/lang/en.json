@@ -82,7 +82,9 @@
       "Hurt": "Hurt",
       "Injured": "Injured",
       "Dying": "Dying",
-      "Dead": "Dead"
+      "Dead": "Dead",
+      "Stung": "Stung",
+      "Degree": "Degree"
     },
     "ResistanceLadder": {
       "Automatic": "Automatic (no roll)",
@@ -267,6 +269,13 @@
       "flaws": "Flaws",
       "effects": "Effects",
       "notes": "Notes"
+    },
+    "ConsequenceDegree": {
+      "0": "Stung (\u20135)",
+      "1": "Hurt (\u201310)",
+      "2": "Injured (\u201315)",
+      "3": "Dying (\u201320)",
+      "4": "Dead"
     }
   }
 }

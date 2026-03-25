@@ -18,19 +18,20 @@
   {{#if consequences.length}}
     <ul class="consequence-list items-list">
       {{#each consequences as |con|}}
-        <li class="consequence-item item flexrow consequence-severity-{{con.system.severity}} {{#if con.system.recovering}}consequence--recovering{{/if}}"
+        <li class="consequence-item item flexrow consequence-severity-{{con.system.degree}} {{#if con.system.recovering}}consequence--recovering{{/if}}"
             data-item-id="{{con.id}}">
 
           <span class="consequence-severity-icon">
-            {{#if (eq con.system.severity 1)}}<i class="fas fa-minus-circle"></i>{{/if}}
-            {{#if (eq con.system.severity 2)}}<i class="fas fa-exclamation-circle"></i>{{/if}}
-            {{#if (eq con.system.severity 3)}}<i class="fas fa-skull-crossbones"></i>{{/if}}
-            {{#if (eq con.system.severity 4)}}<i class="fas fa-times-circle"></i>{{/if}}
+            {{#if (eq con.system.degree 0)}}<i class="fas fa-dot-circle"></i>{{/if}}
+            {{#if (eq con.system.degree 1)}}<i class="fas fa-minus-circle"></i>{{/if}}
+            {{#if (eq con.system.degree 2)}}<i class="fas fa-exclamation-circle"></i>{{/if}}
+            {{#if (eq con.system.degree 3)}}<i class="fas fa-skull-crossbones"></i>{{/if}}
+            {{#if (eq con.system.degree 4)}}<i class="fas fa-times-circle"></i>{{/if}}
           </span>
 
           <span class="consequence-name item-name">{{con.name}}</span>
 
-          {{#unless (eq con.system.severity 4)}}
+          {{#unless (eq con.system.degree 4)}}
             <span class="consequence-penalty tag tag--penalty">{{con.system.penalty}}</span>
           {{/unless}}
 
