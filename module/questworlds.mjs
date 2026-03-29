@@ -75,12 +75,20 @@ Hooks.once("init", function () {
     default: true,
   });
 
+  // V13 requires registerMenu type to be an ApplicationV2 subclass.
+  // Wrap SeedContentApp (V1) in a shim that satisfies the check but
+  // delegates rendering to the real app.
+  class _SeedMenuShim extends foundry.applications.api.ApplicationV2 {
+    static DEFAULT_OPTIONS = { ...super.DEFAULT_OPTIONS };
+    render(...args) { return new SeedContentApp().render(true); }
+  }
+
   game.settings.registerMenu("questworlds", "seedContent", {
     name: "QUESTWORLDS.SeedMenu.Name",
     label: "QUESTWORLDS.SeedMenu.Label",
     hint: "QUESTWORLDS.SeedMenu.Hint",
     icon: "fas fa-seedling",
-    type: SeedContentApp,
+    type: _SeedMenuShim,
     restricted: true,
   });
 
