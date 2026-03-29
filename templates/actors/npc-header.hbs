@@ -1,0 +1,29 @@
+<header class="sheet-header npc-header">
+  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+  <div class="header-grid">
+
+    <div class="header-name">
+      <input name="name" type="text" value="{{actor.name}}" placeholder="NPC Name" />
+    </div>
+
+    <div class="npc-resistance-block">
+      <div class="hd-field">
+        <label>{{localize "QUESTWORLDS.NPC.ResistanceRating"}}</label>
+        <input type="number" name="system.resistanceRating" value="{{system.resistanceRating}}" />
+      </div>
+      <div class="hd-field">
+        <label>{{localize "QUESTWORLDS.NPC.ResistanceLabel"}}</label>
+        <input type="text" name="system.resistanceLabel" value="{{system.resistanceLabel}}" />
+      </div>
+      <div class="hd-field">
+        <label>{{localize "QUESTWORLDS.NPC.Type"}}</label>
+        <select name="system.npcType">
+          <option value="minion"      {{#if (qwEq system.npcType "minion")}}selected{{/if}}>{{localize "QUESTWORLDS.NPC.Minion"}}</option>
+          <option value="independent" {{#if (qwEq system.npcType "independent")}}selected{{/if}}>{{localize "QUESTWORLDS.NPC.Independent"}}</option>
+          <option value="master"      {{#if (qwEq system.npcType "master")}}selected{{/if}}>{{localize "QUESTWORLDS.NPC.Master"}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+</header>

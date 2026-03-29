@@ -10,53 +10,85 @@ export class QWNpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
 
   static DEFAULT_OPTIONS = {
     classes: ["questworlds", "sheet", "actor", "npc"],
-    position: { width: 520, height: 620 },
+    position: { width: 520, height: 480 },
     window: { resizable: true },
     form: { submitOnChange: true, closeOnSubmit: false },
     actions: {
-      itemCreate:  QWNpcSheet._onItemCreate,
-      itemEdit:    QWNpcSheet._onItemEdit,
-      itemDelete:  QWNpcSheet._onItemDelete,
+      itemCreate: QWNpcSheet._onItemCreate,
+      itemEdit:   QWNpcSheet._onItemEdit,
+      itemDelete: QWNpcSheet._onItemDelete,
       abilityRoll: QWNpcSheet._onAbilityRoll,
     },
   };
 
   static PARTS = {
-    sheet: {
-      template: "systems/questworlds/templates/actors/npc-sheet.hbs",
-      scrollable: [".abilities-list", ".notes-tab"],
-    },
+    header:  { template: "systems/questworlds/templates/actors/npc-header.hbs" },
+    tabs:    { template: "templates/generic/tab-navigation.hbs" },
+    abilities: { template: "systems/questworlds/templates/actors/npc-abilities.hbs", scrollable: [""] },
+    notes:   { template: "systems/questworlds/templates/actors/npc-notes.hbs", scrollable: [""] },
   };
+
+  /* ------------------------------------------------------------------ */
+  /*  Tabs                                                                */
+  /* ------------------------------------------------------------------ */
 
   tabGroups = { primary: "abilities" };
 
-  _getTabs() {
-    return {
-      abilities: { id: "abilities", group: "primary", label: "QUESTWORLDS.TabAbilities", active: this.tabGroups.primary === "abilities", cssClass: this.tabGroups.primary === "abilities" ? "active" : "" },
-      notes:     { id: "notes",     group: "primary", label: "QUESTWORLDS.TabNotes",     active: this.tabGroups.primary === "notes",     cssClass: this.tabGroups.primary === "notes"     ? "active" : "" },
-    };
-  }
+  static TABS = {
+    primary: {
+      tabs: [
+        { id: "abilities" },
+        { id: "notes"     },
+      ],
+      labelPrefix: "QUESTWORLDS.Tab",
+      initial: "abilities",
+    },
+  };
+
+  /* ------------------------------------------------------------------ */
+  /*  Context                                                             */
+  /* ------------------------------------------------------------------ */
 
   async _prepareContext(options) {
-    const context  = await super._prepareContext(options);
-    context.system  = this.actor.system;
-    context.items   = this.actor.items;
-    context.grouped = this.actor.getGroupedAbilities();
-    context.isOwner = this.actor.isOwner;
-    context.isGM    = game.user.isGM;
-    context.tabs    = this._getTabs();
+    const context = await super._prepareContext(options);
+    const actor   = this.actor;
+
+    context.actor    = actor;
+    context.system   = actor.system;
+    context.items    = actor.items;
+    context.grouped  = actor.getGroupedAbilities();
+    context.isOwner  = actor.isOwner;
+    context.isGM     = game.user.isGM;
+    context.tabs     = this._prepareTabs("primary");
+
     return context;
   }
 
+  async _preparePartContext(partId, context) {
+    await super._preparePartContext(partId, context);
+    if (["abilities", "notes"].includes(partId)) {
+      context.tab = context.tabs[partId];
+    }
+    return context;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /*  Listeners                                                           */
+  /* ------------------------------------------------------------------ */
+
   _onRender(context, options) {
     super._onRender(context, options);
-    this.element.querySelectorAll(".inline-name, .inline-rating").forEach((el) =>
+
+    const html = this.element;
+
+    // Inline editing
+    html.querySelectorAll(".inline-name, .inline-rating").forEach((el) =>
       el.addEventListener("change", this._onInlineEdit.bind(this)),
     );
   }
 
   /* ------------------------------------------------------------------ */
-  /*  Actions                                                             */
+  /*  Static action handlers                                              */
   /* ------------------------------------------------------------------ */
 
   static async _onItemCreate(event, target) {
@@ -106,7 +138,7 @@ export class QWNpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
       return;
     }
 
-    const heroActor    = controlled.actor;
+    const heroActor     = controlled.actor;
     const heroAbilities = heroActor.items.filter((i) => i.type === "ability");
     if (!heroAbilities.length) {
       ui.notifications.warn(game.i18n.localize("QUESTWORLDS.NpcSheet.HeroNoAbilities"));
@@ -114,7 +146,6 @@ export class QWNpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     }
 
     let heroAbility;
-
     if (heroAbilities.length === 1) {
       heroAbility = heroAbilities[0];
     } else {
@@ -128,13 +159,13 @@ export class QWNpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
           <p>${game.i18n.localize("QUESTWORLDS.NpcSheet.SelectHeroAbility")}</p>
           <div class="form-group">
             <label>${game.i18n.localize("QUESTWORLDS.NpcSheet.HeroAbility")}</label>
-            <select name="heroAbility">${options}</select>
+            <select id="hero-ability">${options}</select>
           </div>
         `,
         ok: {
           label: game.i18n.localize("QUESTWORLDS.Confirm"),
-          callback: (event, button) => {
-            const chosenId = button.form.elements.heroAbility.value;
+          callback: (event, button, dialog) => {
+            const chosenId = dialog.querySelector("#hero-ability").value;
             return heroAbilities.find((a) => a.id === chosenId) ?? null;
           },
         },
@@ -145,8 +176,8 @@ export class QWNpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
 
     const oppositionMasteries = masteryCount(ability.system.rating);
     await game.questworlds.openContestDialog(heroActor, heroAbility, {
-      defaultResistance:           this.actor.system.resistanceRating,
-      defaultOppositionMasteries:  oppositionMasteries,
+      defaultResistance:            this.actor.system.resistanceRating,
+      defaultOppositionMasteries:   oppositionMasteries,
     });
   }
 
@@ -161,12 +192,11 @@ export class QWNpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     if (!itemId || !field) return;
 
     const value = input.type === "number" ? Number(input.value) : input.value;
-    if (isNaN(value) && input.type === "number") return;
+    if (input.type === "number" && isNaN(value)) return;
 
     if (field === "effectiveRating") {
       const item = this.actor.items.get(itemId);
       if (!item || item.type !== "ability") return;
-
       if (item.system.abilityType === "breakout") {
         const keyword    = this.actor.items.get(item.system.keywordId);
         const baseRating = keyword?.system?.rating ?? 0;
@@ -174,7 +204,6 @@ export class QWNpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
         await this.actor.updateEmbeddedDocuments("Item", [{ _id: itemId, "system.breakoutBonus": bonus }]);
         return;
       }
-
       await this.actor.updateEmbeddedDocuments("Item", [{ _id: itemId, "system.rating": value }]);
       return;
     }

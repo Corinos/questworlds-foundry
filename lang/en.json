@@ -276,6 +276,15 @@
       "2": "Injured (\u201315)",
       "3": "Dying (\u201320)",
       "4": "Dead"
-    }
+    },
+    "NPC": {
+      "ResistanceRating": "Resistance Rating",
+      "ResistanceLabel": "Resistance Label",
+      "Type": "NPC Type",
+      "Minion": "Minion",
+      "Independent": "Independent",
+      "Master": "Master"
+    },
+    "EmptyAbilities": "No abilities recorded."
   }
 }
